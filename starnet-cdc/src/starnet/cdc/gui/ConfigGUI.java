@@ -30,16 +30,16 @@ public class ConfigGUI extends javax.swing.JFrame {
         jScrollBar1 = new javax.swing.JScrollBar();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnSalvarESair = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        btnSelecionar = new javax.swing.JButton();
+        CheckBoxEditar1 = new javax.swing.JCheckBox();
+        CheckBoxEditar2 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -48,10 +48,10 @@ public class ConfigGUI extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Configurações");
 
-        jButton1.setText("Salvar e Sair");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvarESair.setText("Salvar e Sair");
+        btnSalvarESair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSalvarESairActionPerformed(evt);
             }
         });
 
@@ -70,24 +70,24 @@ public class ConfigGUI extends javax.swing.JFrame {
         jTextField3.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTextField3.setText("jdbc:mysql://localhost:3306/starnet");
 
-        jButton2.setText("Selecionar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSelecionar.setText("Selecionar");
+        btnSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSelecionarActionPerformed(evt);
             }
         });
 
-        jCheckBox1.setText("Editar");
-        jCheckBox1.addChangeListener(new javax.swing.event.ChangeListener() {
+        CheckBoxEditar1.setText("Editar");
+        CheckBoxEditar1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jCheckBox1StateChanged(evt);
+                CheckBoxEditar1StateChanged(evt);
             }
         });
 
-        jCheckBox2.setText("Editar");
-        jCheckBox2.addChangeListener(new javax.swing.event.ChangeListener() {
+        CheckBoxEditar2.setText("Editar");
+        CheckBoxEditar2.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jCheckBox2StateChanged(evt);
+                CheckBoxEditar2StateChanged(evt);
             }
         });
 
@@ -111,12 +111,12 @@ public class ConfigGUI extends javax.swing.JFrame {
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnSalvarESair)
                                 .addGap(50, 50, 50)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jCheckBox1))))
+                            .addComponent(btnSelecionar)
+                            .addComponent(CheckBoxEditar1))))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -125,7 +125,7 @@ public class ConfigGUI extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox2))
+                        .addComponent(CheckBoxEditar2))
                     .addComponent(jLabel4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -139,21 +139,21 @@ public class ConfigGUI extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(btnSelecionar))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
+                    .addComponent(CheckBoxEditar1))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox2))
+                    .addComponent(CheckBoxEditar2))
                 .addGap(38, 38, 38)
-                .addComponent(jButton1)
+                .addComponent(btnSalvarESair)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -173,21 +173,21 @@ public class ConfigGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnSelecionarActionPerformed
 
-    private void jCheckBox1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox1StateChanged
+    private void CheckBoxEditar1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_CheckBoxEditar1StateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1StateChanged
+    }//GEN-LAST:event_CheckBoxEditar1StateChanged
 
-    private void jCheckBox2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox2StateChanged
+    private void CheckBoxEditar2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_CheckBoxEditar2StateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2StateChanged
+    }//GEN-LAST:event_CheckBoxEditar2StateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSalvarESairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarESairActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSalvarESairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,10 +225,10 @@ public class ConfigGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox CheckBoxEditar1;
+    private javax.swing.JCheckBox CheckBoxEditar2;
+    private javax.swing.JButton btnSalvarESair;
+    private javax.swing.JButton btnSelecionar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
