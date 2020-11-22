@@ -6,6 +6,7 @@ import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
+import javax.swing.JOptionPane
 
 class login {
     fun login(conta: contaLogada): contaLogada {
@@ -31,5 +32,27 @@ class login {
             conexao.fecharConexao(con, statement, rs)
             return contaFinal
         }
+    }
+
+    fun createUser(conta: contaLogada):Boolean{
+        val con:Connection = conexao.conexao()
+        var statement:PreparedStatement? = null
+        var rs:ResultSet? = null
+        val errorClass = Error()
+        var check = false
+
+
+        try {
+            statement = con.prepareStatement("INSERT INTO contas (nome, senha, acesso) VALUES (?, ?, ?)")
+            statement.setString(1, conta.login)
+            statement.setString(2, conta.pass)
+            statement.setInt(3, conta.acesso!!)
+            check = statement.execute();
+        } catch (erro:SQLException){
+            errorClass.openError(" $erro")
+        } finally {
+            conexao.fecharConexao(con, statement, rs)
+        }
+        return check
     }
 }
