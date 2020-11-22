@@ -441,10 +441,14 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
         // TODO add your handling code here:
+        ConfigGUI gui = new ConfigGUI();
+        gui.setVisible(true);
     }//GEN-LAST:event_btnConfigActionPerformed
 
     private void btnAdminConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminConfigActionPerformed
         // TODO add your handling code here:
+        AdminConfigGUI gui = new AdminConfigGUI();
+        gui.setVisible(true);
     }//GEN-LAST:event_btnAdminConfigActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
