@@ -6,6 +6,7 @@
 package starnet.cdc.gui;
 
 
+import starnet.cdc.backend.enums.Estado;
 import starnet.cdc.backend.validacao;
 import starnet.cdc.backend.Error;
 import starnet.cdc.database.bean.contaLogada;
@@ -27,6 +28,20 @@ public class MainGUI extends javax.swing.JFrame {
         if (conta.getAcesso() == 3) {
             this.btnAdminConfig.setVisible(true);
         }
+
+        //Removendo itens do comboBox
+        this.CBBairro.removeAllItems();
+        this.CBCidade.removeAllItems();
+        this.CBEstado.removeAllItems();
+        this.CBPesquisaBairro.removeAllItems();
+        this.CBPesquisaEstado.removeAllItems();
+        this.CBPesquisaCidade.removeAllItems();
+        this.CBValor.removeAllItems();
+
+        //Adicionando itens aos ComboBox's
+        this.CBPesquisaEstado.addItem(Estado.INATIVO.toString());
+        this.CBPesquisaEstado.addItem(Estado.ATIVO.toString());
+        this.CBPesquisaEstado.addItem(Estado.TODOS.toString());
     }
 
     /**
