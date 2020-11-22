@@ -5,6 +5,8 @@
 */
 package starnet.cdc.backend
 
+import starnet.cdc.database.bean.contaLogada
+
 /*
 
   @author falaf
@@ -23,4 +25,22 @@ class validacao {
         }
     }
     fun validarObs(obs:String) = obs.length <= 60
+
+    fun validarLogin(conta: contaLogada):Boolean{
+        var checkNome: Boolean
+        var checkSenha: Boolean
+        var cs:CharSequence
+
+        //Nome
+        cs = conta.login.toString()
+        var pattern = Regex("[a-z]{2,50}") //Regular Expression to validate a name
+        checkNome = pattern.containsMatchIn(cs)
+
+        //Senha
+        cs = conta.pass.toString()
+        pattern = Regex("[a-z]([a-z]|[0-9]){7,30}") //Regular Expression to validate a password
+        checkSenha = pattern.containsMatchIn(cs)
+
+        return checkNome && checkSenha
+    }
 }
