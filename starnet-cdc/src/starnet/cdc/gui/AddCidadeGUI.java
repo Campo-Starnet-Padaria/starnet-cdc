@@ -6,6 +6,13 @@
 
 package starnet.cdc.gui;
 
+import starnet.cdc.backend.Error;
+import starnet.cdc.backend.validacao;
+import starnet.cdc.database.bean.cidade;
+import starnet.cdc.database.dao.cidadeTable;
+
+import javax.swing.*;
+
 /**
  *
  * @author falaf
@@ -13,9 +20,13 @@ package starnet.cdc.gui;
 public class AddCidadeGUI extends javax.swing.JDialog {
 
     /** Creates new form AddCidadeGUI */
-    public AddCidadeGUI(java.awt.Frame parent, boolean modal) {
+    validacao vali;
+    Error errorClass;
+    public AddCidadeGUI(java.awt.Frame parent, boolean modal, validacao vali, Error errorClass) {
         super(parent, modal);
         initComponents();
+        this.vali = vali;
+        this.errorClass = errorClass;
     }
 
     /** This method is called from within the constructor to
@@ -87,54 +98,24 @@ public class AddCidadeGUI extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
+        cidade city = new cidade();
+        city.setNome(this.txtFieldCidade.getText());
+        boolean check = vali.validarCidade(city);
+        if (check) {
+            cidadeTable cidade = new cidadeTable();
+            cidade.inserirCidades(city);
+        } else {
+            errorClass.openError(" nome\nEsse componente não atende a validação,\nmínimo 2 letras,\nMáximo 80 letras.");
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddCidadeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddCidadeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddCidadeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddCidadeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                AddCidadeGUI dialog = new AddCidadeGUI(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

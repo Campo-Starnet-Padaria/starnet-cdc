@@ -5,6 +5,14 @@
  */
 package starnet.cdc.gui;
 
+import starnet.cdc.backend.validacao;
+import starnet.cdc.database.bean.bairro;
+import starnet.cdc.database.bean.cidade;
+import starnet.cdc.database.dao.bairroTable;
+
+import javax.swing.*;
+import java.util.ArrayList;
+
 /**
  *
  * @author falaf
@@ -14,9 +22,16 @@ public class AddBairroGUI extends javax.swing.JDialog {
     /**
      * Creates new form AddBairroGUI
      */
-    public AddBairroGUI(java.awt.Frame parent, boolean modal) {
+    ArrayList<cidade> cidades;
+    validacao vali;
+    public AddBairroGUI(java.awt.Frame parent, boolean modal, ArrayList<cidade> cidades, validacao vali) {
         super(parent, modal);
         initComponents();
+        this.cidades = cidades;
+        this.vali = vali;
+        for (int c = 0; c < cidades.size(); c++){
+            this.CBCidade.addItem(cidades.get(c).getNome());
+        }
     }
 
     /**
@@ -103,53 +118,31 @@ public class AddBairroGUI extends javax.swing.JDialog {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        bairro bairro = new bairro();
+        cidade city = new cidade();
+        city.setNome(this.CBCidade.getSelectedItem().toString());
+        bairro.setCidade(city);
+        bairro.setNome(this.txtFieldBairro.getText());
+
+        //Validando
+        boolean feito = vali.validarBairro(bairro);
+        if (feito) {
+            //Tentar adicionar no banco
+            bairroTable bt = new bairroTable();
+            bt.inserirBairro(bairro);
+        } else {
+            JOptionPane.showMessageDialog(this, "não atende aos requisitos de nome.");
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddBairroGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddBairroGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddBairroGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddBairroGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                AddBairroGUI dialog = new AddBairroGUI(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CBCidade;
