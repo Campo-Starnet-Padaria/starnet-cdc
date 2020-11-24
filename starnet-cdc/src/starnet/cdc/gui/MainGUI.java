@@ -5,15 +5,20 @@
 */
 package starnet.cdc.gui;
 
+import starnet.cdc.backend.Transmissao;
 import starnet.cdc.backend.enums.Estado;
 import starnet.cdc.backend.validacao;
 import starnet.cdc.backend.Error;
 import starnet.cdc.database.bean.bairro;
 import starnet.cdc.database.bean.cidade;
+import starnet.cdc.database.bean.clientesFrontEnd;
 import starnet.cdc.database.bean.contaLogada;
 import starnet.cdc.database.dao.bairroTable;
 import starnet.cdc.database.dao.cidadeTable;
 
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -33,6 +38,8 @@ public class MainGUI extends javax.swing.JFrame {
 
     public MainGUI(contaLogada conta) {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("starnet.png")));
+
         this.conta = conta;
         this.jLabel2.setText(this.conta.getLogin());
         this.btnAdminConfig.setVisible(false);
@@ -50,9 +57,11 @@ public class MainGUI extends javax.swing.JFrame {
         this.CBValor.removeAllItems();
 
         //Adicionando itens aos ComboBox's
-        this.CBPesquisaEstado.addItem(Estado.INATIVO.toString());
         this.CBPesquisaEstado.addItem(Estado.ATIVO.toString());
+        this.CBPesquisaEstado.addItem(Estado.INATIVO.toString());
         this.CBPesquisaEstado.addItem(Estado.TODOS.toString());
+        this.CBEstado.addItem(Estado.ATIVO.toString());
+        this.CBEstado.addItem(Estado.INATIVO.toString());
 
         //Valores dos planos
         this.CBValor.addItem("R$ 80,00");
@@ -231,41 +240,15 @@ public class MainGUI extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Nome", "Documento", "Vencimento", "Valor", "Estado", "Observação", "Cidade", "Bairro"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -353,21 +336,21 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CBBairro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCadastrar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CBValor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel10))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCadastrar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,8 +432,9 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -466,8 +450,9 @@ public class MainGUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(1, 1, 1))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -522,7 +507,47 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        // TODO add your handling code here:
+        //Procurar Pelas Cidades
+        cidade cidade = new cidade();
+        cidade.setNome(this.CBPesquisaCidade.getSelectedItem().toString());
+
+        bairro bairro = new bairro();
+        bairro.setNome(this.CBPesquisaBairro.getSelectedItem().toString());
+        bairro.setCidade(cidade);
+
+        Transmissao ts = new Transmissao();
+        ArrayList<clientesFrontEnd> clientes = new ArrayList<clientesFrontEnd>();
+
+        if (bairro.getNome() == "ALL") {
+            clientes = ts.getClientesDeTodosOsBairros(cidade);
+        } else {
+            clientes = ts.getClientes(bairro);
+        }
+        /*System.out.println("Nome:" + clientes.get(0).getNome()
+        + "\nDocumento: " + clientes.get(0).getDocumento()
+        + "\nVencimento: " + clientes.get(0).getVencimento()
+        + "\nValor: " + clientes.get(0).getValor()
+        + "\nEstado: " + clientes.get(0).getEstado()
+        + "\nObservacao: " + clientes.get(0).getObservacao()
+        + "\nCidade: " + clientes.get(0).getCidade().getNome()
+        + "\nBairro: " + clientes.get(0).getBairro().getNome());*/
+        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+        for (int c = 0; c < model.getRowCount(); c++) {
+            model.removeRow(c);
+        }
+        for (int c = 0; c < clientes.size(); c++) {
+            model.addRow(new Object[]{
+                    clientes.get(c).getNome(),
+                    clientes.get(c).getDocumento(),
+                    clientes.get(c).getVencimento(),
+                    clientes.get(c).getValor(),
+                    clientes.get(c).getEstado(),
+                    clientes.get(c).getObservacao(),
+                    clientes.get(c).getCidade().getNome(),
+                    clientes.get(c).getBairro().getNome()
+            });
+        }
+
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -656,6 +681,7 @@ public class MainGUI extends javax.swing.JFrame {
         for (int c = 0; c < bairros.size(); c++){
             this.CBPesquisaBairro.addItem(bairros.get(c).getNome());
         }
+        this.CBPesquisaBairro.addItem("ALL");
     }
 
     public void syncBairro(){
