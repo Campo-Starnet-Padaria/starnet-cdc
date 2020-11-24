@@ -5,7 +5,6 @@
 */
 package starnet.cdc.gui;
 
-
 import starnet.cdc.backend.enums.Estado;
 import starnet.cdc.backend.validacao;
 import starnet.cdc.backend.Error;
@@ -54,6 +53,14 @@ public class MainGUI extends javax.swing.JFrame {
         this.CBPesquisaEstado.addItem(Estado.INATIVO.toString());
         this.CBPesquisaEstado.addItem(Estado.ATIVO.toString());
         this.CBPesquisaEstado.addItem(Estado.TODOS.toString());
+
+        //Valores dos planos
+        this.CBValor.addItem("R$ 80,00");
+        this.CBValor.addItem("R$ 100,00");
+        this.CBValor.addItem("R$ 120,00");
+        this.CBValor.addItem("R$ 150,00");
+        this.CBValor.addItem("R$ 180,00");
+        this.CBValor.addItem("R$ 200,00");
         sync();
     }
 
@@ -206,30 +213,10 @@ public class MainGUI extends javax.swing.JFrame {
         jLabel3.setText("Cidade:");
 
         CBPesquisaCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        CBPesquisaCidade.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                CBPesquisaCidadeItemStateChanged(evt);
-            }
-        });
-        CBPesquisaCidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CBPesquisaCidadeActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Bairro:");
 
         CBPesquisaBairro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        CBPesquisaBairro.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                CBPesquisaBairroItemStateChanged(evt);
-            }
-        });
-        CBPesquisaBairro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CBPesquisaBairroActionPerformed(evt);
-            }
-        });
 
         jLabel5.setText("Estado:");
 
@@ -545,22 +532,6 @@ public class MainGUI extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
-
-    private void CBPesquisaBairroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBPesquisaBairroItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CBPesquisaBairroItemStateChanged
-
-    private void CBPesquisaCidadeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBPesquisaCidadeItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CBPesquisaCidadeItemStateChanged
-
-    private void CBPesquisaBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBPesquisaBairroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CBPesquisaBairroActionPerformed
-
-    private void CBPesquisaCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBPesquisaCidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CBPesquisaCidadeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
