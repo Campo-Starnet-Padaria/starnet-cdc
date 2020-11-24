@@ -5,6 +5,8 @@
 */
 package starnet.cdc.backend
 
+import starnet.cdc.database.bean.bairro
+import starnet.cdc.database.bean.cidade
 import starnet.cdc.database.bean.contaLogada
 
 /*
@@ -33,14 +35,27 @@ class validacao {
 
         //Nome
         cs = conta.login.toString()
-        var pattern = Regex("[a-z]{2,50}") //Regular Expression to validate a name
+        var pattern = Regex("[a-zA-Z-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]{2,50}") //Regular Expression to validate a name
         checkNome = pattern.containsMatchIn(cs)
 
         //Senha
         cs = conta.pass.toString()
-        pattern = Regex("[a-z]([a-z]|[0-9]){7,30}") //Regular Expression to validate a password
+        pattern = Regex("[a-zA-Z]([a-zA-Z]|[0-9]|){7,30}") //Regular Expression to validate a password
         checkSenha = pattern.containsMatchIn(cs)
 
         return checkNome && checkSenha
+    }
+
+    //validar Nome para uma nova cidade
+    fun validarCidade(cidade: cidade):Boolean{
+        val nome:CharSequence = cidade.nome.toString()
+        val pattern = Regex("[a-zA-Z-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]|[\\s]")
+        return pattern.containsMatchIn(nome)
+    }
+
+    fun validarBairro(bairro:bairro):Boolean{
+        val nome:CharSequence = bairro.nome.toString()
+        val pattern = Regex("[a-zA-Z-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]|[\\s]")
+        return pattern.containsMatchIn(nome)
     }
 }

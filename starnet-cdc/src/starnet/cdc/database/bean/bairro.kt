@@ -11,4 +11,7 @@ package starnet.cdc.database.bean
   Created on 20/11/2020
 */
 
-class bairro (nome:String, cidade: cidade)
+class bairro {
+    var cidade:cidade? = null
+    var nome:String? = null
+}
