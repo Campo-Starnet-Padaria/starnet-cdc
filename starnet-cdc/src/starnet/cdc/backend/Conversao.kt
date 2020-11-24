@@ -1,5 +1,7 @@
 package starnet.cdc.backend
 
+import starnet.cdc.database.bean.clientes
+
 class Conversao {
     //Conversão de String para Float, usada para o banco de dados
     fun converterValorDoPlano(valor: String):Float{
@@ -9,10 +11,10 @@ class Conversao {
     }
 
     //Conversão de Float para String, usada no front-end - Sobrecarga da função anterior
-    fun converterValorDoPlano(valor:Float):String{
-        var valorConvertido = valor.toString()
+    fun converterValorDoPlano(cliente:clientes):String{
+        var valorConvertido = cliente.valor.toString()
         valorConvertido.replace(".", ",")
-        valorConvertido = "R$ $valorConvertido";
+        valorConvertido = "R$ $valorConvertido"
         return valorConvertido
     }
 }
