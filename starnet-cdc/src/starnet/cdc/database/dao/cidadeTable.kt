@@ -30,11 +30,11 @@ class cidadeTable {
         var statement:PreparedStatement? = null
         var rs:ResultSet? = null
         val cidades = ArrayList<cidade>()
-        var cidade = cidade()
         try {
             statement = con.prepareStatement("SELECT * FROM cidade")
             rs = statement.executeQuery()
             while(rs.next()){
+                var cidade = cidade()
                 cidade.nome = rs.getString("nome")
                 cidades.add(cidade)
             }

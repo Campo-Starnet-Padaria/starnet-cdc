@@ -9,7 +9,13 @@ package starnet.cdc.gui;
 import starnet.cdc.backend.enums.Estado;
 import starnet.cdc.backend.validacao;
 import starnet.cdc.backend.Error;
+import starnet.cdc.database.bean.bairro;
+import starnet.cdc.database.bean.cidade;
 import starnet.cdc.database.bean.contaLogada;
+import starnet.cdc.database.dao.bairroTable;
+import starnet.cdc.database.dao.cidadeTable;
+
+import java.util.ArrayList;
 
 
 public class MainGUI extends javax.swing.JFrame {
@@ -17,9 +23,15 @@ public class MainGUI extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
+    //Variaveis Acopladas
     protected Error errorClass = new Error();
     protected validacao vali = new validacao();
     protected contaLogada conta;
+    protected bairroTable bt = new bairroTable();
+    protected cidadeTable ct = new cidadeTable();
+    public ArrayList<cidade> cidades = new ArrayList<>();
+    public ArrayList<bairro> bairros = new ArrayList<>();
+
     public MainGUI(contaLogada conta) {
         initComponents();
         this.conta = conta;
@@ -42,6 +54,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.CBPesquisaEstado.addItem(Estado.INATIVO.toString());
         this.CBPesquisaEstado.addItem(Estado.ATIVO.toString());
         this.CBPesquisaEstado.addItem(Estado.TODOS.toString());
+        sync();
     }
 
     /**
@@ -92,6 +105,8 @@ public class MainGUI extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         CBBairro = new javax.swing.JComboBox<>();
         btnCadastrar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
 
@@ -191,10 +206,30 @@ public class MainGUI extends javax.swing.JFrame {
         jLabel3.setText("Cidade:");
 
         CBPesquisaCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBPesquisaCidade.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CBPesquisaCidadeItemStateChanged(evt);
+            }
+        });
+        CBPesquisaCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBPesquisaCidadeActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Bairro:");
 
         CBPesquisaBairro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBPesquisaBairro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CBPesquisaBairroItemStateChanged(evt);
+            }
+        });
+        CBPesquisaBairro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBPesquisaBairroActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Estado:");
 
@@ -291,6 +326,13 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Atualizar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -324,20 +366,21 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CBBairro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btnCadastrar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CBValor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel10)
+                        .addComponent(jLabel10))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50))))
+                        .addComponent(btnCadastrar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,9 +405,17 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(CBCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(CBBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCadastrar))
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addComponent(btnCadastrar)
+                    .addComponent(jButton2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jButton1.setText("Atualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -375,23 +426,26 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBPesquisaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBPesquisaBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBPesquisaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPesquisar)
-                        .addContainerGap(182, Short.MAX_VALUE))))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 862, Short.MAX_VALUE)
-                .addContainerGap())
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CBPesquisaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CBPesquisaBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CBPesquisaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnPesquisar)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,10 +458,11 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(CBPesquisaBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(CBPesquisaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisar))
+                    .addComponent(btnPesquisar)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -448,22 +503,30 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btnAddCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCidadeActionPerformed
         // TODO add your handling code here:
+        AddCidadeGUI gui = new AddCidadeGUI(this, true, vali, errorClass);
+        gui.setVisible(true);
+        sync();
     }//GEN-LAST:event_btnAddCidadeActionPerformed
 
     private void btnAddBairoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBairoActionPerformed
         // TODO add your handling code here:
+        AddBairroGUI gui = new AddBairroGUI(this, true, cidades, vali);
+        gui.setVisible(true);
+        sync();
     }//GEN-LAST:event_btnAddBairoActionPerformed
 
     private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
         // TODO add your handling code here:
         ConfigGUI gui = new ConfigGUI();
         gui.setVisible(true);
+        sync();
     }//GEN-LAST:event_btnConfigActionPerformed
 
     private void btnAdminConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminConfigActionPerformed
         // TODO add your handling code here:
         AdminConfigGUI gui = new AdminConfigGUI(vali);
         gui.setVisible(true);
+        sync();
     }//GEN-LAST:event_btnAdminConfigActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -482,6 +545,32 @@ public class MainGUI extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void CBPesquisaBairroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBPesquisaBairroItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CBPesquisaBairroItemStateChanged
+
+    private void CBPesquisaCidadeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CBPesquisaCidadeItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CBPesquisaCidadeItemStateChanged
+
+    private void CBPesquisaBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBPesquisaBairroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CBPesquisaBairroActionPerformed
+
+    private void CBPesquisaCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBPesquisaCidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CBPesquisaCidadeActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.syncPesquisaBairro();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.syncBairro();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -503,6 +592,8 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnEstatistica;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSair;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -558,5 +649,52 @@ public class MainGUI extends javax.swing.JFrame {
             return false;
         }
         return true;
+    }
+
+    public void sync() {
+        //Cidades
+        this.cidades.removeAll(cidades);
+        cidades.addAll(ct.getCidade());
+        this.CBCidade.removeAllItems();
+        this.CBPesquisaCidade.removeAllItems();
+        for (int c = 0; c < cidades.size(); c++) {
+            this.CBCidade.addItem(cidades.get(c).getNome());
+            this.CBPesquisaCidade.addItem(cidades.get(c).getNome());
+        }
+
+        //Bairros
+        cidade cidade = new cidade();
+        cidade.setNome(this.CBPesquisaCidade.getSelectedItem().toString());
+        this.bairros.removeAll(bairros);
+        this.CBPesquisaBairro.removeAllItems();
+        this.CBBairro.removeAllItems();
+        bairros.addAll(bt.getBairros(cidade));
+        for (int c = 0; c < bairros.size(); c++){
+            this.CBBairro.addItem(bairros.get(c).getNome());
+            this.CBPesquisaBairro.addItem(bairros.get(c).getNome());
+        }
+    }
+
+    public void syncPesquisaBairro(){
+        //Bairro
+        cidade cidade = new cidade();
+        cidade.setNome(this.CBPesquisaCidade.getSelectedItem().toString());
+        this.bairros.removeAll(bairros);
+        this.CBPesquisaBairro.removeAllItems();
+        bairros.addAll(bt.getBairros(cidade));
+        for (int c = 0; c < bairros.size(); c++){
+            this.CBPesquisaBairro.addItem(bairros.get(c).getNome());
+        }
+    }
+
+    public void syncBairro(){
+        cidade cidade = new cidade();
+        cidade.setNome(this.CBCidade.getSelectedItem().toString());
+        this.bairros.removeAll(bairros);
+        this.CBBairro.removeAllItems();
+        bairros.addAll(bt.getBairros(cidade));
+        for (int c = 0; c < bairros.size(); c++){
+            this.CBBairro.addItem(bairros.get(c).getNome());
+        }
     }
 }
