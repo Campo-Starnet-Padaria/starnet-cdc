@@ -1,5 +1,6 @@
 package starnet.cdc.backend
 
+import starnet.cdc.backend.enums.Estado
 import starnet.cdc.database.bean.clientes
 
 class Conversao {

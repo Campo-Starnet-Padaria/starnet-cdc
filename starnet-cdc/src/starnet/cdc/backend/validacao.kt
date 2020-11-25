@@ -7,7 +7,9 @@ package starnet.cdc.backend
 
 import starnet.cdc.database.bean.bairro
 import starnet.cdc.database.bean.cidade
+import starnet.cdc.database.bean.clientes
 import starnet.cdc.database.bean.contaLogada
+import java.awt.Stroke
 
 /*
 
@@ -16,8 +18,24 @@ import starnet.cdc.database.bean.contaLogada
 */
 
 class validacao {
-    fun validarNome(nome:String) = nome.length in 1..100
-    fun validarDocumento(doc:String) = doc.length == 7
+    fun validarNome(nome:String): Boolean {
+        val cs:CharSequence = nome
+        val pattern = Regex("[a-zA-Z-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]{3,50}")
+        if (nome.isNotEmpty()) {
+            return pattern.containsMatchIn(cs)
+        } else {
+            return false
+        }
+    }
+    fun validarDocumento(doc:String): Boolean {
+        val cs:CharSequence = doc
+        val pattern = Regex("[6][6][0-9]{5}")
+        if (cs.isNotEmpty()) {
+            return pattern.containsMatchIn(cs)
+        } else {
+            return false
+        }
+    }
     fun validarVencimento(venc:String):Boolean{
         if(!venc.isEmpty() && venc.length == 10){
             val pattern = Regex("[0-9][0-9]/[0-9][1-9]/[0-9][0-9][0-9][0-9]") //Regular Expression to validate a date
@@ -35,7 +53,7 @@ class validacao {
 
         //Nome
         cs = conta.login.toString()
-        var pattern = Regex("[a-zA-Z-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]{2,50}") //Regular Expression to validate a name
+        var pattern = Regex("[a-zA-Z-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]{3,50}") //Regular Expression to validate a name
         checkNome = pattern.containsMatchIn(cs)
 
         //Senha
@@ -57,5 +75,34 @@ class validacao {
         val nome:CharSequence = bairro.nome.toString()
         val pattern = Regex("[a-zA-Z-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]|[\\s]")
         return pattern.containsMatchIn(nome)
+    }
+
+    fun check(cliente: clientes):Boolean {
+        val errorClass = Error()
+        var check = false
+        check = validarNome(cliente.nome!!)
+        if (!check){
+            errorClass.openError("nome")
+            return false
+        }
+
+        check = validarDocumento(cliente.documento!!)
+        if (!check){
+            errorClass.openError("documento")
+            return false
+        }
+
+        check = validarVencimento(cliente.vencimento!!)
+        if (!check){
+            errorClass.openError("vencimento")
+            return false
+        }
+
+        check = validarObs(cliente.observacao!!)
+        if (!check){
+            errorClass.openError("observação")
+            return false
+        }
+        return true
     }
 }

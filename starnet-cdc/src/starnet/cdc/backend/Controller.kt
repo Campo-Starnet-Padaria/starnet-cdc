@@ -6,8 +6,8 @@ import starnet.cdc.database.bean.clientes
 import starnet.cdc.database.bean.clientesFrontEnd
 import starnet.cdc.database.dao.clientesEntity
 
-class Transmissao {
-    val Conversao = Conversao()
+class Controller {
+    private val Conversao = Conversao()
     fun getClientesDeTodosOsBairros(cidade: cidade):ArrayList<clientesFrontEnd>{
         val clientesEntity = clientesEntity()
         val Clientes:ArrayList<clientes> = clientesEntity.getClientesEnetityOfCity(cidade.nome.toString())
@@ -46,4 +46,28 @@ class Transmissao {
         }
         return clientesConvertidos
     }
+
+    fun inserirCliente(clientesFrontEnd: clientesFrontEnd){
+        val cliente = clientes()
+        val clientesEntity = clientesEntity()
+        val vali = validacao()
+        //Convertendo um cliente
+        cliente.nome = clientesFrontEnd.nome
+        cliente.documento = clientesFrontEnd.documento
+        cliente.vencimento = clientesFrontEnd.vencimento
+        cliente.valor = Conversao.converterValorDoPlano(clientesFrontEnd.valor!!)
+        cliente.estado = clientesFrontEnd.estado
+        cliente.observacao = clientesFrontEnd.observacao
+        cliente.cidade!!.nome = clientesFrontEnd.cidade!!.nome
+        cliente.bairro!!.nome = clientesFrontEnd.bairro!!.nome
+        cliente.bairro!!.cidade!!.nome = clientesFrontEnd.cidade!!.nome
+
+        //Validando
+        val check = vali.check(cliente)
+        if (check) {
+            clientesEntity.addClientes(cliente)
+        }
+    }
+
+
 }
