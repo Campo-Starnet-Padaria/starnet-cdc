@@ -5,7 +5,7 @@
 */
 package starnet.cdc.gui;
 
-import starnet.cdc.backend.Transmissao;
+import starnet.cdc.backend.Controller;
 import starnet.cdc.backend.enums.Estado;
 import starnet.cdc.backend.validacao;
 import starnet.cdc.backend.Error;
@@ -18,7 +18,6 @@ import starnet.cdc.database.dao.cidadeTable;
 
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -515,7 +514,7 @@ public class MainGUI extends javax.swing.JFrame {
         bairro.setNome(this.CBPesquisaBairro.getSelectedItem().toString());
         bairro.setCidade(cidade);
 
-        Transmissao ts = new Transmissao();
+        Controller ts = new Controller();
         ArrayList<clientesFrontEnd> clientes = new ArrayList<clientesFrontEnd>();
 
         if (bairro.getNome() == "ALL") {
@@ -551,7 +550,28 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        // TODO add your handling code here:
+        //Cadastrando Usuários
+        cidade cidade = new cidade();
+        bairro bairro = new bairro();
+        Controller controller = new Controller();
+        clientesFrontEnd cliente = new clientesFrontEnd();
+        cliente.setNome(this.txtFieldNome.getText());
+        cliente.setDocumento(this.txtFieldDocumento.getText());
+        cliente.setVencimento(this.txtFieldVencimento.getText());
+        cliente.setValor(this.CBValor.getSelectedItem().toString());
+        if (CBEstado.getSelectedItem() == "ATIVO") {
+            cliente.setEstado(Estado.ATIVO);
+        } else {
+            cliente.setEstado(Estado.INATIVO);
+        }
+        cliente.setObservacao(this.txtFieldObs.getText());
+        cidade.setNome(this.CBCidade.getSelectedItem().toString());
+        bairro.setNome(this.CBBairro.getSelectedItem().toString());
+        bairro.setCidade(cidade);
+        cliente.setCidade(cidade);
+        cliente.setBairro(bairro);
+        controller.inserirCliente(cliente);
+
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -615,37 +635,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextField txtFieldObs;
     private javax.swing.JTextField txtFieldVencimento;
     // End of variables declaration//GEN-END:variables
-    public final boolean check(){
-        boolean check = false;
-        //Validando Nome:
-        check = this.vali.validarNome(this.txtFieldNome.getText());
-        if (!check) {
-            errorClass.openError("Nome");
-            return false;
-        }
-
-        //Validando Documento:
-        check = this.vali.validarDocumento(this.txtFieldDocumento.getText());
-        if (!check){
-            errorClass.openError("Documento");
-            return false;
-        }
-
-        //Validando Vencimento:
-        check = this.vali.validarVencimento(this.txtFieldVencimento.getText());
-        if(!check){
-            errorClass.openError("Vencimento");
-            return false;
-        }
-
-        //Validando Obs:
-        check = this.vali.validarObs(this.txtFieldObs.getText());
-        if(!check){
-            errorClass.openError("Observação");
-            return false;
-        }
-        return true;
-    }
 
     public void sync() {
         //Cidades
