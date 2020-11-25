@@ -58,9 +58,8 @@ class Controller {
         cliente.valor = Conversao.converterValorDoPlano(clientesFrontEnd.valor!!)
         cliente.estado = clientesFrontEnd.estado
         cliente.observacao = clientesFrontEnd.observacao
-        cliente.cidade!!.nome = clientesFrontEnd.cidade!!.nome
-        cliente.bairro!!.nome = clientesFrontEnd.bairro!!.nome
-        cliente.bairro!!.cidade!!.nome = clientesFrontEnd.cidade!!.nome
+        cliente.cidade = clientesFrontEnd.cidade
+        cliente.bairro = clientesFrontEnd.bairro
 
         //Validando
         val check = vali.check(cliente)
