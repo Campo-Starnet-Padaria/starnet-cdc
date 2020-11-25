@@ -6,6 +6,7 @@
 package starnet.cdc.gui;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  *
@@ -18,6 +19,7 @@ public class ConfigGUI extends javax.swing.JFrame {
      */
     public ConfigGUI() {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("starnet.png")));
     }
 
     /**
