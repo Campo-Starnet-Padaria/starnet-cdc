@@ -531,9 +531,7 @@ public class MainGUI extends javax.swing.JFrame {
         + "\nCidade: " + clientes.get(0).getCidade().getNome()
         + "\nBairro: " + clientes.get(0).getBairro().getNome());*/
         DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
-        for (int c = 0; c < model.getRowCount(); c++) {
-            model.removeRow(c);
-        }
+        model.setNumRows(0);
         for (int c = 0; c < clientes.size(); c++) {
             model.addRow(new Object[]{
                     clientes.get(c).getNome(),

@@ -45,7 +45,6 @@ class clientesEntity {
                 cliente.cidade = cidade
                 cliente.estado = state
                 clientes.add(cliente)
-                clientes.add(cliente)
             }
         }catch (erro:SQLException){
             JOptionPane.showMessageDialog(null, "Não foi possível encontrar os clientes\nerro:$erro")
