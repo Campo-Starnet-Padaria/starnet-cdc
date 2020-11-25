@@ -49,7 +49,7 @@ public class AdminConfigGUI extends javax.swing.JFrame {
         btnExportarEstatisticas = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setTitle("Starnet - Configurações Da Administração");
         setResizable(false);
 
