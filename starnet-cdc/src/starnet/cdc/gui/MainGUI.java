@@ -551,11 +551,25 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         //Cadastrando Usuários
-        boolean check = check();
+        cidade cidade = new cidade();
+        bairro bairro = new bairro();
         Controller controller = new Controller();
-        if (check) {
-            controller.inserirCliente();
+        clientesFrontEnd cliente = new clientesFrontEnd();
+        cliente.setNome(this.txtFieldNome.getText());
+        cliente.setDocumento(this.txtFieldDocumento.getText());
+        cliente.setVencimento(this.txtFieldVencimento.getText());
+        cliente.setValor(this.CBValor.getSelectedItem().toString());
+        if (CBEstado.getSelectedItem() == Estado.ATIVO) {
+            cliente.setEstado(Estado.ATIVO);
+        } else {
+            cliente.setEstado(Estado.INATIVO);
         }
+        cliente.setObservacao(this.txtFieldObs.getText());
+        cidade.setNome(this.CBCidade.getSelectedItem().toString());
+        bairro.setNome(this.CBBairro.getSelectedItem().toString());
+        bairro.setCidade(cidade);
+        controller.inserirCliente(cliente);
+
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
