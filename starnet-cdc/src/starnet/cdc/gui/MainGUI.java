@@ -658,6 +658,7 @@ public class MainGUI extends javax.swing.JFrame {
             this.CBBairro.addItem(bairros.get(c).getNome());
             this.CBPesquisaBairro.addItem(bairros.get(c).getNome());
         }
+        this.CBPesquisaBairro.addItem("ALL");
     }
 
     public void syncPesquisaBairro(){
@@ -667,10 +668,10 @@ public class MainGUI extends javax.swing.JFrame {
         this.bairros.removeAll(bairros);
         this.CBPesquisaBairro.removeAllItems();
         bairros.addAll(bt.getBairros(cidade));
+        this.CBPesquisaBairro.addItem("ALL");
         for (int c = 0; c < bairros.size(); c++){
             this.CBPesquisaBairro.addItem(bairros.get(c).getNome());
         }
-        this.CBPesquisaBairro.addItem("ALL");
     }
 
     public void syncBairro(){
