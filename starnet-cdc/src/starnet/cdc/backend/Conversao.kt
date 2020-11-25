@@ -6,9 +6,10 @@ import starnet.cdc.database.bean.clientes
 class Conversao {
     //Conversão de String para Float, usada para o banco de dados
     fun converterValorDoPlano(valor: String):Float{
-        valor.replace("R$ ", "")
-        valor.replace(",", ".")
-        return valor.toFloat()
+        var nValor = valor
+        nValor = nValor.removeRange(0, 2)
+        nValor = nValor.replace(",", ".")
+        return nValor.toFloat()
     }
 
     //Conversão de Float para String, usada no front-end - Sobrecarga da função anterior

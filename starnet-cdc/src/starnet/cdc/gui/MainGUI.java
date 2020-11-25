@@ -559,7 +559,7 @@ public class MainGUI extends javax.swing.JFrame {
         cliente.setDocumento(this.txtFieldDocumento.getText());
         cliente.setVencimento(this.txtFieldVencimento.getText());
         cliente.setValor(this.CBValor.getSelectedItem().toString());
-        if (CBEstado.getSelectedItem() == Estado.ATIVO) {
+        if (CBEstado.getSelectedItem() == "ATIVO") {
             cliente.setEstado(Estado.ATIVO);
         } else {
             cliente.setEstado(Estado.INATIVO);
@@ -568,6 +568,8 @@ public class MainGUI extends javax.swing.JFrame {
         cidade.setNome(this.CBCidade.getSelectedItem().toString());
         bairro.setNome(this.CBBairro.getSelectedItem().toString());
         bairro.setCidade(cidade);
+        cliente.setCidade(cidade);
+        cliente.setBairro(bairro);
         controller.inserirCliente(cliente);
 
     }//GEN-LAST:event_btnCadastrarActionPerformed

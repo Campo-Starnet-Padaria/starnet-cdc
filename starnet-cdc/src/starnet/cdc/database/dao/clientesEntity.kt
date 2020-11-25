@@ -108,15 +108,18 @@ class clientesEntity {
         //Um exemplo de inserção na classe clientes
         // 'Ronsâgela De Souza Rodrigues', '6608755', '01/02/2021', '80.00', 'true', 'Testando no momento', 'Pouso Alegre', 'Árvore Grande'
         try {
-            statement = con.prepareStatement("INSERT INTO clientes VALUES (?, ?, ?, ?, ?, ?, ?,?)")
+            statement = con.prepareStatement("INSERT INTO clientes (nome, documento, vencimento, valor, estado, observacao, cidade, bairro)" +
+                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
+            println("cidade: ${cliente.cidade?.nome}")
+            println("cidade: ${cliente.cidade?.nome}, bairro: ${cliente.bairro?.nome}")
             statement.setString(1, cliente.nome)
             statement.setString(2, cliente.documento)
             statement.setString(3, cliente.vencimento)
             statement.setFloat(4, cliente.valor!!)
             statement.setBoolean(5, cliente.estado!!.estadoToBoolean(cliente.estado!!))
             statement.setString(6, cliente.observacao)
-            statement.setString(7, cliente.cidade!!.nome)
-            statement.setString(8, cliente.bairro!!.nome)
+            statement.setString(7, cliente.cidade?.nome.toString())
+            statement.setString(8, cliente.bairro?.nome.toString())
             check = statement.execute()
         } catch (erro:SQLException){
             JOptionPane.showMessageDialog(null, "Erro ao inserir cliente no banco de dados.", "Sem êxito", JOptionPane.ERROR_MESSAGE)
