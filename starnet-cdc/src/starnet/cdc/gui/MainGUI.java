@@ -70,6 +70,7 @@ public class MainGUI extends javax.swing.JFrame {
         this.CBValor.addItem("R$ 180,00");
         this.CBValor.addItem("R$ 200,00");
         sync();
+        tableInput();
     }
 
     /**
@@ -507,6 +508,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         //Procurar Pelas Cidades
+<<<<<<< Updated upstream
         cidade cidade = new cidade();
         cidade.setNome(this.CBPesquisaCidade.getSelectedItem().toString());
 
@@ -547,6 +549,9 @@ public class MainGUI extends javax.swing.JFrame {
             });
         }
 
+=======
+        tableInput();
+>>>>>>> Stashed changes
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -576,6 +581,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
+        //this.txtFieldDocumento.setEditable(false);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -681,6 +687,38 @@ public class MainGUI extends javax.swing.JFrame {
         bairros.addAll(bt.getBairros(cidade));
         for (int c = 0; c < bairros.size(); c++){
             this.CBBairro.addItem(bairros.get(c).getNome());
+        }
+    }
+
+    public void tableInput(){
+        cidade cidade = new cidade();
+        cidade.setNome(this.CBPesquisaCidade.getSelectedItem().toString());
+
+        bairro bairro = new bairro();
+        bairro.setNome(this.CBPesquisaBairro.getSelectedItem().toString());
+        bairro.setCidade(cidade);
+
+        Controller ts = new Controller();
+        ArrayList<clientesFrontEnd> clientes = new ArrayList<clientesFrontEnd>();
+
+        if (bairro.getNome() == "ALL") {
+            clientes = ts.getClientesDeTodosOsBairros(cidade);
+        } else {
+            clientes = ts.getClientes(bairro);
+        }
+        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+        model.setNumRows(0);
+        for (int c = 0; c < clientes.size(); c++) {
+            model.addRow(new Object[]{
+                    clientes.get(c).getNome(),
+                    clientes.get(c).getDocumento(),
+                    clientes.get(c).getVencimento(),
+                    clientes.get(c).getValor(),
+                    clientes.get(c).getEstado(),
+                    clientes.get(c).getObservacao(),
+                    clientes.get(c).getCidade().getNome(),
+                    clientes.get(c).getBairro().getNome()
+            });
         }
     }
 }
