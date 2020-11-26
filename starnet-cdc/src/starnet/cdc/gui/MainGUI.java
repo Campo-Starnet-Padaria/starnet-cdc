@@ -128,6 +128,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Starnet - Controle de carnes do cliente");
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -518,19 +523,12 @@ public class MainGUI extends javax.swing.JFrame {
         Controller ts = new Controller();
         ArrayList<clientesFrontEnd> clientes = new ArrayList<clientesFrontEnd>();
 
-        if (bairro.getNome() == "ALL") {
+        if (bairro.getNome().equals("ALL")) {
             clientes = ts.getClientesDeTodosOsBairros(cidade);
         } else {
             clientes = ts.getClientes(bairro);
         }
-        /*System.out.println("Nome:" + clientes.get(0).getNome()
-        + "\nDocumento: " + clientes.get(0).getDocumento()
-        + "\nVencimento: " + clientes.get(0).getVencimento()
-        + "\nValor: " + clientes.get(0).getValor()
-        + "\nEstado: " + clientes.get(0).getEstado()
-        + "\nObservacao: " + clientes.get(0).getObservacao()
-        + "\nCidade: " + clientes.get(0).getCidade().getNome()
-        + "\nBairro: " + clientes.get(0).getBairro().getNome());*/
+
         DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
         model.setNumRows(0);
         for (int c = 0; c < clientes.size(); c++) {
@@ -550,6 +548,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         //Cadastrando Usuários
+        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
         cidade cidade = new cidade();
         bairro bairro = new bairro();
         Controller controller = new Controller();
@@ -569,8 +568,19 @@ public class MainGUI extends javax.swing.JFrame {
         bairro.setCidade(cidade);
         cliente.setCidade(cidade);
         cliente.setBairro(bairro);
-        controller.inserirCliente(cliente);
 
+        if (this.jTable1.getSelectedRow() == -1) {
+            controller.inserirCliente(cliente);
+        } else {
+            controller.alterarCliente(cliente, model.getValueAt(this.jTable1.getSelectedRow(), 1).toString());
+            jTable1.getSelectionModel().clearSelection();
+            this.txtFieldNome.setText("");
+            this.txtFieldDocumento.setText("6611111");
+            this.txtFieldVencimento.setText("01/01/2021");
+            this.txtFieldObs.setText("");
+            this.jTable1.getSelectionModel().clearSelection();
+            this.btnCadastrar.setText("Cadastrar");
+        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -622,7 +632,7 @@ public class MainGUI extends javax.swing.JFrame {
                 break;
             }
         }
-        
+
         bairroTable bt = new bairroTable();
         cidade city = new cidade();
         ArrayList<bairro> bairro = new ArrayList<>();
@@ -636,7 +646,7 @@ public class MainGUI extends javax.swing.JFrame {
                 break;
             }
         }
-
+        this.btnCadastrar.setText("Re-Castrar");
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -648,6 +658,16 @@ public class MainGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.syncBairro();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+        this.txtFieldNome.setText("");
+        this.txtFieldDocumento.setText("66");
+        this.txtFieldVencimento.setText("01/01/2021");
+        this.txtFieldObs.setText("");
+        this.jTable1.getSelectionModel().clearSelection();
+        this.btnCadastrar.setText("Cadastrar");
+    }//GEN-LAST:event_formMouseClicked
 
     /**
      * @param args the command line arguments
