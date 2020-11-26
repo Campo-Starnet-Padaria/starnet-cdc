@@ -1,8 +1,8 @@
-/*
-  Copyright (C) Starnet [2020] - [2030] All Rights Reserved.
-  @author falaf
-  Created on 20/11/2020
-*/
+/**
+Copyright (C) Starnet [2020] - [2030] All Rights Reserved.
+@author falaf
+Created on 20/11/2020
+ */
 package starnet.cdc.backend
 
 import starnet.cdc.database.bean.bairro
@@ -10,12 +10,6 @@ import starnet.cdc.database.bean.cidade
 import starnet.cdc.database.bean.clientes
 import starnet.cdc.database.bean.contaLogada
 import java.awt.Stroke
-
-/*
-
-  @author falaf
-  Created on 20/11/2020
-*/
 
 class validacao {
     fun validarNome(nome:String): Boolean {
