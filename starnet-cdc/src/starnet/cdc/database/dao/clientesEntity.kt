@@ -126,4 +126,33 @@ class clientesEntity {
             conexao.fecharConexao(con, statement)
         }
     }
+
+    fun editClientes(cliente:clientes, oldDoc:String):Boolean{
+        val con:Connection = conexao.conexao()
+        var statement:PreparedStatement? = null
+        var check = false
+
+        try {
+            //UPDATE `starnet`.`clientes` SET `nome` = 'Ana Maria Meilheres', `documento` = '6610102', `vencimento` = '10/01/2021',
+            // `valor` = '150', `estado` = '0', `observacao` = 'ab', `cidade` = 'Pouso Alegre', `bairro` = 'Árvore Grande'
+            // WHERE (`documento` = '6610101');
+            statement = con.prepareStatement("UPDATE clientes SET nome = ?, documento = ?, vencimento = ?, valor = ?," +
+                    "estado = ?, observacao = ?, cidade = ?, bairro = ? WHERE (documento = ?)")
+            statement.setString(1, cliente.nome)
+            statement.setString(2, cliente.documento)
+            statement.setString(3, cliente.vencimento)
+            statement.setFloat(4, cliente.valor!!)
+            statement.setBoolean(5, cliente.estado!!.estadoToBoolean(cliente.estado!!))
+            statement.setString(6, cliente.observacao)
+            statement.setString(7, cliente.cidade!!.nome.toString())
+            statement.setString(8, cliente.bairro!!.nome.toString())
+            statement.setString(9,oldDoc)
+            check = statement.execute()
+        } catch (erro:SQLException){
+            JOptionPane.showMessageDialog(null, "Erro não foi possível atualizar o cliente. Codigo do erro:\n$erro")
+        } finally {
+            conexao.fecharConexao(con, statement)
+            return check
+        }
+    }
 }

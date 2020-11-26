@@ -98,10 +98,14 @@ class validacao {
             return false
         }
 
-        check = validarObs(cliente.observacao!!)
-        if (!check){
-            errorClass.openError("observação")
-            return false
+        if (cliente.observacao == null) {
+            return true
+        } else {
+            check = validarObs(cliente.observacao!!)
+            if (!check){
+                errorClass.openError("observação")
+                return false
+            }
         }
         return true
     }
