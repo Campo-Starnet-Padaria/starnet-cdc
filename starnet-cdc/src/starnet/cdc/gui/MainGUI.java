@@ -574,8 +574,69 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-        //this.txtFieldDocumento.setEditable(false);
+        // Quando clicar em um cliente na JTable ele vai subir com suas propriedades para o painel de criação/edição
+        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+        System.out.println(model.getValueAt(this.jTable1.getSelectedRow(), 0));
+
+        //Levando para o painel de adição/edição
+        this.txtFieldNome.setText(model.getValueAt(this.jTable1.getSelectedRow(), 0).toString());
+        this.txtFieldDocumento.setText(model.getValueAt(this.jTable1.getSelectedRow(), 1).toString());
+        this.txtFieldVencimento.setText(model.getValueAt(this.jTable1.getSelectedRow(), 2).toString());
+        this.txtFieldObs.setText(model.getValueAt(this.jTable1.getSelectedRow(), 5).toString());
+        //comboBox
+        ArrayList<String> valores = new ArrayList<String>();
+        String valorDaTabela = model.getValueAt(this.jTable1.getSelectedRow(), 3).toString();
+        valores.add("R$ 80.0");
+        valores.add("R$ 100.0");
+        valores.add("R$ 120.0");
+        valores.add("R$ 150.0");
+        valores.add("R$ 180.0");
+        valores.add("R$ 200.0");
+
+        for (int c = 0; c < this.CBValor.getItemCount(); c++) {
+            if (valorDaTabela.equals(valores.get(c))) {
+                this.CBValor.setSelectedIndex(c);
+                break;
+            }
+        }
+
+        String valorEstadoDaTabela = model.getValueAt(this.jTable1.getSelectedRow(), 4).toString();
+        ArrayList<String> valorEstado = new ArrayList<>();
+        valorEstado.add("ATIVO");
+        valorEstado.add("INATIVO");
+
+        for (int c = 0; c < this.CBEstado.getItemCount(); c++){
+            if (valorEstadoDaTabela.equals(valorEstado.get(c))) {
+                this.CBEstado.setSelectedIndex(c);
+                break;
+            }
+        }
+
+        cidadeTable ct = new cidadeTable();
+        ArrayList<cidade> cidade = new ArrayList<>();
+        String cidadeDoCliente = model.getValueAt(this.jTable1.getSelectedRow(), 6).toString();
+        cidade.addAll(ct.getCidade());
+        for (int c = 0; c < this.CBCidade.getItemCount(); c++) {
+            if (cidadeDoCliente.equals(cidade.get(c).getNome())) {
+                this.CBCidade.setSelectedIndex(c);
+                break;
+            }
+        }
+        
+        bairroTable bt = new bairroTable();
+        cidade city = new cidade();
+        ArrayList<bairro> bairro = new ArrayList<>();
+        String bairroDoCliente = model.getValueAt(this.jTable1.getSelectedRow(), 7).toString();
+        city.setNome(this.CBCidade.getSelectedItem().toString());
+        bairro.addAll(bt.getBairros(city));
+
+        for (int c = 0; c < this.CBBairro.getItemCount(); c++){
+            if (bairroDoCliente.equals(bairro.get(c).getNome())) {
+                this.CBBairro.setSelectedIndex(c);
+                break;
+            }
+        }
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
