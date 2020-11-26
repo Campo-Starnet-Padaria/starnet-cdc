@@ -10,6 +10,7 @@ import starnet.cdc.database.bean.contaLogada;
 import starnet.cdc.database.dao.login;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  *
@@ -23,6 +24,7 @@ public class AdminConfigGUI extends javax.swing.JFrame {
     validacao vali;
     public AdminConfigGUI(validacao vali) {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("starnet.png")));
         this.vali = vali;
     }
 
@@ -49,7 +51,7 @@ public class AdminConfigGUI extends javax.swing.JFrame {
         btnExportarEstatisticas = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setTitle("Starnet - Configurações Da Administração");
         setResizable(false);
 

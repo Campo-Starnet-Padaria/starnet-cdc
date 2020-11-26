@@ -533,9 +533,7 @@ public class MainGUI extends javax.swing.JFrame {
         + "\nCidade: " + clientes.get(0).getCidade().getNome()
         + "\nBairro: " + clientes.get(0).getBairro().getNome());*/
         DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
-        for (int c = 0; c < model.getRowCount(); c++) {
-            model.removeRow(c);
-        }
+        model.setNumRows(0);
         for (int c = 0; c < clientes.size(); c++) {
             model.addRow(new Object[]{
                     clientes.get(c).getNome(),
@@ -664,6 +662,7 @@ public class MainGUI extends javax.swing.JFrame {
             this.CBBairro.addItem(bairros.get(c).getNome());
             this.CBPesquisaBairro.addItem(bairros.get(c).getNome());
         }
+        this.CBPesquisaBairro.addItem("ALL");
     }
 
     public void syncPesquisaBairro(){
@@ -673,10 +672,10 @@ public class MainGUI extends javax.swing.JFrame {
         this.bairros.removeAll(bairros);
         this.CBPesquisaBairro.removeAllItems();
         bairros.addAll(bt.getBairros(cidade));
+        this.CBPesquisaBairro.addItem("ALL");
         for (int c = 0; c < bairros.size(); c++){
             this.CBPesquisaBairro.addItem(bairros.get(c).getNome());
         }
-        this.CBPesquisaBairro.addItem("ALL");
     }
 
     public void syncBairro(){

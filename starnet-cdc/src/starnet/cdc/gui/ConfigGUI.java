@@ -5,6 +5,9 @@
  */
 package starnet.cdc.gui;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  *
  * @author falaf
@@ -16,6 +19,7 @@ public class ConfigGUI extends javax.swing.JFrame {
      */
     public ConfigGUI() {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("starnet.png")));
     }
 
     /**
@@ -41,7 +45,7 @@ public class ConfigGUI extends javax.swing.JFrame {
         CheckBoxEditar1 = new javax.swing.JCheckBox();
         CheckBoxEditar2 = new javax.swing.JCheckBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Fira Code Retina", 1, 14)); // NOI18N

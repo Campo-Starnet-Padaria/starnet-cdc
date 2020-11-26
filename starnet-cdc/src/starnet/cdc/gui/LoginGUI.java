@@ -13,6 +13,7 @@ import starnet.cdc.database.bean.contaLogada;
 import starnet.cdc.database.dao.login;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  *
@@ -26,6 +27,7 @@ public class LoginGUI extends javax.swing.JFrame {
     contaLogada conta = new contaLogada();
     public LoginGUI() {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("starnet.png")));
     }
 
     /**
