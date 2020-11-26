@@ -508,7 +508,6 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         //Procurar Pelas Cidades
-<<<<<<< Updated upstream
         cidade cidade = new cidade();
         cidade.setNome(this.CBPesquisaCidade.getSelectedItem().toString());
 
@@ -546,10 +545,7 @@ public class MainGUI extends javax.swing.JFrame {
                     clientes.get(c).getBairro().getNome()
             });
         }
-
-=======
         tableInput();
->>>>>>> Stashed changes
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
