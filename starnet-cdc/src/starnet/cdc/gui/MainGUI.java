@@ -578,15 +578,15 @@ public class MainGUI extends javax.swing.JFrame {
             this.txtFieldDocumento.setText("6611111");
             this.txtFieldVencimento.setText("01/01/2021");
             this.txtFieldObs.setText("");
-            this.jTable1.getSelectionModel().clearSelection();
             this.btnCadastrar.setText("Cadastrar");
+            this.jTable1.getSelectionModel().clearSelection();
         }
+        tableInput();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // Quando clicar em um cliente na JTable ele vai subir com suas propriedades para o painel de criação/edição
         DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
-        System.out.println(model.getValueAt(this.jTable1.getSelectedRow(), 0));
 
         //Levando para o painel de adição/edição
         this.txtFieldNome.setText(model.getValueAt(this.jTable1.getSelectedRow(), 0).toString());
