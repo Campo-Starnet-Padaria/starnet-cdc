@@ -114,8 +114,6 @@ class clientesEntity {
         try {
             statement = con.prepareStatement("INSERT INTO clientes (nome, documento, vencimento, valor, estado, observacao, cidade, bairro)" +
                     " VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
-            println("cidade: ${cliente.cidade?.nome}")
-            println("cidade: ${cliente.cidade?.nome}, bairro: ${cliente.bairro?.nome}")
             statement.setString(1, cliente.nome)
             statement.setString(2, cliente.documento)
             statement.setString(3, cliente.vencimento)
