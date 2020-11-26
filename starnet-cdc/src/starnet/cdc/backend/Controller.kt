@@ -69,5 +69,25 @@ class Controller {
         }
     }
 
+    fun alterarCliente(clientesFrontEnd: clientesFrontEnd, oldDoc:String){
+        val cliente = clientes()
+        val clientesEntity = clientesEntity()
+        val vali = validacao()
 
+        //Convertendo um Cliente
+        cliente.nome = clientesFrontEnd.nome
+        cliente.documento = clientesFrontEnd.documento
+        cliente.vencimento = clientesFrontEnd.vencimento
+        cliente.valor = Conversao.converterValorDoPlano(clientesFrontEnd.valor!!)
+        cliente.estado = clientesFrontEnd.estado
+        cliente.cidade = clientesFrontEnd.cidade
+        cliente.bairro = clientesFrontEnd.bairro
+
+        //Validando
+        val check = vali.check(cliente)
+        if (check) {
+            //Alterando o cliente
+            clientesEntity.editClientes(cliente, oldDoc)
+        }
+    }
 }
