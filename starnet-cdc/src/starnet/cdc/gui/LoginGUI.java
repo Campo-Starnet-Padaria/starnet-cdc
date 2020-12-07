@@ -5,7 +5,6 @@
  */
 package starnet.cdc.gui;
 
-import jdk.nashorn.internal.scripts.JO;
 import starnet.cdc.StarnetCdc;
 import starnet.cdc.backend.PasswordConverter;
 import starnet.cdc.backend.validacao;

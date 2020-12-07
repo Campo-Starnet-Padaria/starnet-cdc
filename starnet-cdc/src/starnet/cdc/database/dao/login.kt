@@ -5,6 +5,7 @@ Created on 20/11/2020
  */
 package starnet.cdc.database.dao
 
+import starnet.cdc.backend.Encripta
 import starnet.cdc.backend.Error
 import starnet.cdc.database.bean.contaLogada
 import java.sql.Connection
@@ -20,10 +21,11 @@ class login {
         var statement:PreparedStatement? = null
         var rs:ResultSet? = null
         val errorClass = Error()
+        val encripta = Encripta()
         try {
             statement = con.prepareStatement("SELECT * FROM contas WHERE nome = ? and senha = ?")
             statement.setString(1, conta.login)
-            statement.setString(2, conta.pass)
+            statement.setString(2, encripta.encriptar(conta.pass.toString()))
             rs = statement.executeQuery()
             if (rs.next()) {
                 contaFinal.id = rs.getInt("id")
