@@ -43,8 +43,15 @@ public class MainGUI extends javax.swing.JFrame {
         this.conta = conta;
         this.jLabel2.setText(this.conta.getLogin());
         this.btnAdminConfig.setVisible(false);
+        this.btnEstatistica.setVisible(false);
         if (conta.getAcesso() == 3) {
             this.btnAdminConfig.setVisible(true);
+            this.btnEstatistica.setVisible(true);
+        }
+        if (conta.getAcesso() == 1) {
+            this.btnAddCidade.setVisible(false);
+            this.btnAddBairo.setVisible(false);
+            this.jPanel4.setVisible(false);
         }
 
         //Removendo itens do comboBox
