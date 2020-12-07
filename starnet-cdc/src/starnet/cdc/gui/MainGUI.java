@@ -16,6 +16,7 @@ import starnet.cdc.database.bean.contaLogada;
 import starnet.cdc.database.dao.bairroTable;
 import starnet.cdc.database.dao.cidadeTable;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
