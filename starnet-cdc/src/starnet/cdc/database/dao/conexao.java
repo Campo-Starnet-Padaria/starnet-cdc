@@ -9,9 +9,9 @@ import java.sql.*;
 
 public class conexao {
     public static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/starnet";
-    private static final String USER = "root";
-    private static final String PASS = "";
+    private static final String URL = "jdbc:mysql://25.49.100.193:4096/starnet";
+    private static final String USER = "starnetcdc";
+    private static final String PASS = "zLatPeXfFlY62rH1";
 
     public static Connection conexao() throws ClassNotFoundException, SQLException {
         Class.forName(DRIVER);
