@@ -144,6 +144,7 @@ public class MainGUI extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(153, 153, 153));
 
         btnSair.setText("Sair");
+        btnSair.setToolTipText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSairActionPerformed(evt);
@@ -151,6 +152,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
 
         btnConfig.setText("Configurações");
+        btnConfig.setToolTipText("Acesso a configurações");
         btnConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfigActionPerformed(evt);
@@ -158,6 +160,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
 
         btnAddBairo.setText("Adicionar Bairro");
+        btnAddBairo.setToolTipText("Acesso a adicionar bairro");
         btnAddBairo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddBairoActionPerformed(evt);
@@ -165,6 +168,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
 
         btnAdminConfig.setText("Admin Configs");
+        btnAdminConfig.setToolTipText("Acesso a Configurações de Administração");
         btnAdminConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdminConfigActionPerformed(evt);
@@ -172,6 +176,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
 
         btnAddCidade.setText("Adicionar Cidade");
+        btnAddCidade.setToolTipText("Acesso a adicionar cidade");
         btnAddCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddCidadeActionPerformed(evt);
@@ -179,6 +184,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
 
         btnEstatistica.setText("Estatistica");
+        btnEstatistica.setToolTipText("Acesso a parte de estatisticas");
         btnEstatistica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEstatisticaActionPerformed(evt);
@@ -189,6 +195,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Root");
+        jLabel2.setToolTipText("Nome do seu usuário");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -234,10 +241,12 @@ public class MainGUI extends javax.swing.JFrame {
         jLabel3.setText("Cidade:");
 
         CBPesquisaCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBPesquisaCidade.setToolTipText("após selecionar uma cidade clique em atualizar");
 
         jLabel4.setText("Bairro:");
 
         CBPesquisaBairro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBPesquisaBairro.setToolTipText("Após selecionar um bairro selecione o estado ou clique em pesquisar");
 
         jLabel5.setText("Estado:");
 
@@ -266,6 +275,7 @@ public class MainGUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setToolTipText("visualização dos dados dos clientes");
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -273,33 +283,43 @@ public class MainGUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        txtFieldNome.setToolTipText("Nome do cliente");
+
         jLabel6.setText("Nome:");
 
         jLabel7.setText("Documento:");
 
         txtFieldDocumento.setText("66");
+        txtFieldDocumento.setToolTipText("Documento do cliente");
 
         jLabel8.setText("Vencimento:");
 
         txtFieldVencimento.setText("01/01/2021");
+        txtFieldVencimento.setToolTipText("vencimento do carnê");
 
         jLabel9.setText("Valor:");
 
         CBValor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBValor.setToolTipText("valor do plano");
 
         jLabel10.setText("Estado:");
 
         CBEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBEstado.setToolTipText("estado do cliente");
 
         jLabel11.setText("Observação:");
+
+        txtFieldObs.setToolTipText("observação");
 
         jLabel12.setText("Cidade:");
 
         CBCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBCidade.setToolTipText("cidade do cliente");
 
         jLabel13.setText("Bairro:");
 
         CBBairro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBBairro.setToolTipText("bairro do cliente");
 
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
