@@ -5,6 +5,8 @@
  */
 package starnet.cdc.gui;
 
+import starnet.cdc.backend.Reference;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,8 +20,13 @@ public class ConfigGUI extends javax.swing.JFrame {
      * Creates new form ConfigGUI
      */
     public ConfigGUI() {
+        Reference references = new Reference();
+        String version = references.getVersionReference();
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("starnet.png")));
+        this.lblversion.setText("Versão do Starnet-CDC: " + version);
+        this.jTextField3.setText(references.getDbString());
+
     }
 
     /**
@@ -35,17 +42,11 @@ public class ConfigGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnSalvarESair = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        btnSelecionar = new javax.swing.JButton();
-        CheckBoxEditar1 = new javax.swing.JCheckBox();
         CheckBoxEditar2 = new javax.swing.JCheckBox();
+        lblversion = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Fira Code Retina", 1, 14)); // NOI18N
@@ -59,34 +60,11 @@ public class ConfigGUI extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setEditable(false);
-
-        jLabel2.setText("Local para salvar dados no disco:");
-
-        jLabel3.setText("Porta do Servidor Banco De Dados MySQL:");
-
-        jTextField2.setEditable(false);
-        jTextField2.setText("3306");
-
         jLabel4.setText("URL + Driver JDBC do servidor Banco De Dados:");
 
         jTextField3.setEditable(false);
         jTextField3.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTextField3.setText("jdbc:mysql://localhost:3306/starnet");
-
-        btnSelecionar.setText("Selecionar");
-        btnSelecionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSelecionarActionPerformed(evt);
-            }
-        });
-
-        CheckBoxEditar1.setText("Editar");
-        CheckBoxEditar1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                CheckBoxEditar1StateChanged(evt);
-            }
-        });
 
         CheckBoxEditar2.setText("Editar");
         CheckBoxEditar2.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -95,70 +73,49 @@ public class ConfigGUI extends javax.swing.JFrame {
             }
         });
 
+        lblversion.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblversion.setText("Versão do Starnet-CDC: 1.0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnSalvarESair)
-                                .addGap(50, 50, 50)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSelecionar)
-                            .addComponent(CheckBoxEditar1))))
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalvarESair)
+                .addGap(137, 137, 137))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(CheckBoxEditar2))
-                    .addComponent(jLabel4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(CheckBoxEditar2))
+                            .addComponent(lblversion, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(4, 4, 4)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSelecionar))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CheckBoxEditar1))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CheckBoxEditar2))
-                .addGap(38, 38, 38)
+                .addGap(48, 48, 48)
+                .addComponent(lblversion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(50, 50, 50)
                 .addComponent(btnSalvarESair)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,45 +128,43 @@ public class ConfigGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSelecionarActionPerformed
-
-    private void CheckBoxEditar1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_CheckBoxEditar1StateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CheckBoxEditar1StateChanged
-
     private void CheckBoxEditar2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_CheckBoxEditar2StateChanged
         // TODO add your handling code here:
+        if (!this.CheckBoxEditar2.isSelected()){
+            this.jTextField3.setEditable(false);
+        } else {
+            this.jTextField3.setEditable(true);
+        }
+
     }//GEN-LAST:event_CheckBoxEditar2StateChanged
 
     private void btnSalvarESairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarESairActionPerformed
         // TODO add your handling code here:
+        if (this.CheckBoxEditar2.isSelected()) {
+            Reference references = new Reference();
+            references.editarDBString(this.jTextField3.getText());
+        }
+        this.dispose();
     }//GEN-LAST:event_btnSalvarESairActionPerformed
-
     /**
      * @param args the command line arguments
      */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox CheckBoxEditar1;
     private javax.swing.JCheckBox CheckBoxEditar2;
     private javax.swing.JButton btnSalvarESair;
-    private javax.swing.JButton btnSelecionar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollBar jScrollBar1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel lblversion;
     // End of variables declaration//GEN-END:variables
 }

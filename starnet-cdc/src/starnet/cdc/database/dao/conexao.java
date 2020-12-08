@@ -5,11 +5,14 @@
  */
 package starnet.cdc.database.dao;
 
+import starnet.cdc.backend.Reference;
+
 import java.sql.*;
 
 public class conexao {
+    private static final Reference reference = new Reference();
     public static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://25.49.100.193:4096/starnet";
+    private static final String URL = reference.getDbString();
     private static final String USER = "starnetcdc";
     private static final String PASS = "zLatPeXfFlY62rH1";
 
