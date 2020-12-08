@@ -1,6 +1,6 @@
 /**
  Copyright (C) Starnet [2020] - [2030] All Rights Reserved.
- @author falaf
+ @author Felipe Alafy
  Created on 20/11/2020
  */
 package starnet.cdc.gui;
@@ -483,6 +483,8 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btnEstatisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstatisticaActionPerformed
         // TODO add your handling code here:
+        EstatisticaGUI es = new EstatisticaGUI();
+        es.setVisible(true);
     }//GEN-LAST:event_btnEstatisticaActionPerformed
 
     private void btnAddCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCidadeActionPerformed
