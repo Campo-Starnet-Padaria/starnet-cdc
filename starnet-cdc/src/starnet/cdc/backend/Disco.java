@@ -33,26 +33,52 @@ public class Disco {
         }
     }
 
-    public boolean writer(String folder, String fileToRead, ArrayList<String> toWrite){
-        File file = new File(folder + "/" + fileToRead + ".know");
+    public boolean writer(String folder, String fileToRead, ArrayList<String> toWrite, Boolean replace){
+        File file = new File(folder + "/" + fileToRead);
         Path path = file.toPath();
         try {
-            // Deleting file exists
-            if(Files.exists(path)) {
-                Files.delete(path);
+            if(!Files.exists(path) && replace) {
+                // Writing
+                BufferedWriter  writer = new BufferedWriter(new FileWriter(file));
+                for (String s : toWrite) {
+                    writer.write(s);
+                    writer.newLine();
+                }
+                writer.flush();
+                writer.close();
+            } else if (Files.exists(path) && replace){
+                BufferedWriter  writer = new BufferedWriter(new FileWriter(file));
+                for (String s : toWrite) {
+                    writer.write(s);
+                    writer.newLine();
+                }
+                writer.flush();
+                writer.close();
+            } else {
+                ArrayList<String> loaded;
+                loaded = read(folder, fileToRead);
+                // Writing
+                BufferedWriter  writer = new BufferedWriter(new FileWriter(file));
+                for (String s : loaded) {
+                    writer.write(s);
+                    writer.newLine();
+                }
+                writer.flush();
+                writer.close();
             }
-
-            // Writing
-            BufferedWriter  writer = new BufferedWriter(new FileWriter(file));
-            for (int row = 0; row < toWrite.size(); row++) {
-                writer.write(toWrite.get(row));
-                writer.newLine();
-            }
-            writer.flush();
-            writer.close();
             return true;
         } catch (IOException ex) {
             Logger.getLogger(Disco.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public boolean existsFile(String folder, String file){
+        File file2 = new File(folder + "/" + file);
+        Path path = file2.toPath();
+        if (Files.exists(path)) {
+            return true;
+        } else {
             return false;
         }
     }
