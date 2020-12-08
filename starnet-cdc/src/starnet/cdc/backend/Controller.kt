@@ -84,6 +84,7 @@ class Controller {
         cliente.documento = clientesFrontEnd.documento
         cliente.vencimento = clientesFrontEnd.vencimento
         cliente.valor = Conversao.converterValorDoPlano(clientesFrontEnd.valor!!)
+        cliente.observacao = clientesFrontEnd.observacao
         cliente.estado = clientesFrontEnd.estado
         cliente.cidade = clientesFrontEnd.cidade
         cliente.bairro = clientesFrontEnd.bairro

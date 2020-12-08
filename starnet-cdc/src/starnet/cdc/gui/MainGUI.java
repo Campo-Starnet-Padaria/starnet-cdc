@@ -314,7 +314,7 @@ public class MainGUI extends javax.swing.JFrame {
         jLabel12.setText("Cidade:");
 
         CBCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        CBCidade.setToolTipText("cidade do cliente");
+        CBCidade.setToolTipText("cidade do cliente lembre-se de clicar em atualizar para pegar os bairros");
 
         jLabel13.setText("Bairro:");
 
@@ -593,7 +593,11 @@ public class MainGUI extends javax.swing.JFrame {
         } else {
             cliente.setEstado(Estado.INATIVO);
         }
-        cliente.setObservacao(this.txtFieldObs.getText());
+        if (this.txtFieldObs.getText().isEmpty()) {
+            cliente.setObservacao("nulo");
+        } else {
+            cliente.setObservacao(this.txtFieldObs.getText());
+        }
         cidade.setNome(this.CBCidade.getSelectedItem().toString());
         bairro.setNome(this.CBBairro.getSelectedItem().toString());
         bairro.setCidade(cidade);
