@@ -1,26 +1,15 @@
-/*
-  Copyright (C) Starnet [2020] - [2030] All Rights Reserved.
-  @author falaf
-  Created on 20/11/2020
-*/
-package starnet.cdc.gui;
-
-import starnet.cdc.backend.validacao;
-import starnet.cdc.database.bean.contaLogada;
 /**
  Copyright (C) Starnet [2020] - [2030] All Rights Reserved.
  @author falaf
  Created on 20/11/2020
  */
+package starnet.cdc.gui;
+import starnet.cdc.backend.validacao;
+import starnet.cdc.database.bean.contaLogada;
 import starnet.cdc.database.dao.login;
-
 import javax.swing.*;
 import java.awt.*;
 
-/**
- *
- * @author falaf
- */
 public class AdminConfigGUI extends javax.swing.JFrame {
 
     /**
