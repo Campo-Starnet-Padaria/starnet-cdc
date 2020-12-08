@@ -1,3 +1,8 @@
+/**
+Copyright (C) Felipe Alafy All Rights Reserved.
+@author Felipe Alafy
+Created on 20/11/2020
+ */
 package starnet.cdc.backend
 
 import sun.misc.BASE64Encoder

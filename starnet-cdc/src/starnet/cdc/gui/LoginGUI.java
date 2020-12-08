@@ -1,6 +1,6 @@
 /**
  Copyright (C) Starnet [2020] - [2030] All Rights Reserved.
- @author falaf
+ @author Felipe Alafy
  Created on 20/11/2020
  */
 package starnet.cdc.gui;
@@ -14,10 +14,7 @@ import starnet.cdc.database.dao.login;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- *
- * @author falaf
- */
+
 public class LoginGUI extends javax.swing.JFrame {
 
     /**
