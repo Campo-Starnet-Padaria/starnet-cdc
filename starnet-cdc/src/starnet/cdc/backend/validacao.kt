@@ -52,7 +52,7 @@ class validacao {
 
         //Senha
         cs = conta.pass.toString()
-        pattern = Regex("[a-zA-Z]([a-zA-Z]|[0-9]|){7,30}") //Regular Expression to validate a password
+        pattern = Regex("[a-zA-Z]([a-zA-Z]|[0-9]|){7,32}") //Regular Expression to validate a password
         checkSenha = pattern.containsMatchIn(cs)
 
         return checkNome && checkSenha
