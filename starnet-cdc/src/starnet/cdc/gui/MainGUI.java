@@ -530,7 +530,9 @@ public class MainGUI extends javax.swing.JFrame {
         Controller ts = new Controller();
         ArrayList<clientesFrontEnd> clientes = new ArrayList<clientesFrontEnd>();
 
-        if (bairro.getNome().equals("ALL")) {
+        if (cidade.getNome().equals("ALL")) {
+            clientes = ts.getClientesDeTodasAsCidades();
+        } else if (bairro.getNome().equals("ALL")) {
             clientes = ts.getClientesDeTodosOsBairros(cidade);
         } else {
             clientes = ts.getClientes(bairro);
@@ -730,6 +732,7 @@ public class MainGUI extends javax.swing.JFrame {
         cidades.addAll(ct.getCidade());
         this.CBCidade.removeAllItems();
         this.CBPesquisaCidade.removeAllItems();
+        this.CBPesquisaCidade.addItem("ALL");
         for (int c = 0; c < cidades.size(); c++) {
             this.CBCidade.addItem(cidades.get(c).getNome());
             this.CBPesquisaCidade.addItem(cidades.get(c).getNome());
@@ -742,11 +745,11 @@ public class MainGUI extends javax.swing.JFrame {
         this.CBPesquisaBairro.removeAllItems();
         this.CBBairro.removeAllItems();
         bairros.addAll(bt.getBairros(cidade));
+        this.CBPesquisaBairro.addItem("ALL");
         for (int c = 0; c < bairros.size(); c++){
             this.CBBairro.addItem(bairros.get(c).getNome());
             this.CBPesquisaBairro.addItem(bairros.get(c).getNome());
         }
-        this.CBPesquisaBairro.addItem("ALL");
     }
 
     public void syncPesquisaBairro(){
@@ -784,7 +787,9 @@ public class MainGUI extends javax.swing.JFrame {
         Controller ts = new Controller();
         ArrayList<clientesFrontEnd> clientes = new ArrayList<clientesFrontEnd>();
 
-        if (bairro.getNome() == "ALL") {
+        if (cidade.getNome().equals("ALL")) {
+            clientes = ts.getClientesDeTodasAsCidades();
+        } else if (bairro.getNome().equals("ALL")) {
             clientes = ts.getClientesDeTodosOsBairros(cidade);
         } else {
             clientes = ts.getClientes(bairro);
