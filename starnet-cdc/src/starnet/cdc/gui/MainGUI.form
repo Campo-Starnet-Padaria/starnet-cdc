@@ -125,6 +125,7 @@
             <Component class="javax.swing.JButton" name="btnSair">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sair"/>
+                <Property name="toolTipText" type="java.lang.String" value="Sair"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSairActionPerformed"/>
@@ -133,6 +134,7 @@
             <Component class="javax.swing.JButton" name="btnConfig">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Configura&#xe7;&#xf5;es"/>
+                <Property name="toolTipText" type="java.lang.String" value="Acesso a configura&#xe7;&#xf5;es"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfigActionPerformed"/>
@@ -141,6 +143,7 @@
             <Component class="javax.swing.JButton" name="btnAddBairo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Adicionar Bairro"/>
+                <Property name="toolTipText" type="java.lang.String" value="Acesso a adicionar bairro"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddBairoActionPerformed"/>
@@ -149,6 +152,7 @@
             <Component class="javax.swing.JButton" name="btnAdminConfig">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Admin Configs"/>
+                <Property name="toolTipText" type="java.lang.String" value="Acesso a Configura&#xe7;&#xf5;es de Administra&#xe7;&#xe3;o"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdminConfigActionPerformed"/>
@@ -157,6 +161,7 @@
             <Component class="javax.swing.JButton" name="btnAddCidade">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Adicionar Cidade"/>
+                <Property name="toolTipText" type="java.lang.String" value="Acesso a adicionar cidade"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddCidadeActionPerformed"/>
@@ -165,6 +170,7 @@
             <Component class="javax.swing.JButton" name="btnEstatistica">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Estatistica"/>
+                <Property name="toolTipText" type="java.lang.String" value="Acesso a parte de estatisticas"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEstatisticaActionPerformed"/>
@@ -181,6 +187,7 @@
                   <Font name="Dialog" size="14" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Root"/>
+                <Property name="toolTipText" type="java.lang.String" value="Nome do seu usu&#xe1;rio"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -261,6 +268,7 @@
                     <StringItem index="3" value="Item 4"/>
                   </StringArray>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="ap&#xf3;s selecionar uma cidade clique em atualizar"/>
               </Properties>
               <Events>
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="CBPesquisaCidadeItemStateChanged"/>
@@ -285,6 +293,7 @@
                     <StringItem index="3" value="Item 4"/>
                   </StringArray>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Ap&#xf3;s selecionar um bairro selecione o estado ou clique em pesquisar"/>
               </Properties>
               <Events>
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="CBPesquisaBairroItemStateChanged"/>
@@ -343,6 +352,7 @@
                         <Column editable="false" title="Bairro" type="java.lang.Object"/>
                       </Table>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="visualiza&#xe7;&#xe3;o dos dados dos clientes"/>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
@@ -404,15 +414,15 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="txtFieldNome" min="-2" pref="185" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtFieldDocumento" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtFieldDocumento" min="-2" pref="69" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
@@ -421,7 +431,7 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="CBCidade" max="32767" attributes="0"/>
+                                  <Component id="CBCidade" min="-2" pref="134" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -492,6 +502,9 @@
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="txtFieldNome">
+                  <Properties>
+                    <Property name="toolTipText" type="java.lang.String" value="Nome do cliente"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel6">
                   <Properties>
@@ -505,7 +518,8 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtFieldDocumento">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="6611111"/>
+                    <Property name="text" type="java.lang.String" value="66"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Documento do cliente"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel8">
@@ -516,6 +530,7 @@
                 <Component class="javax.swing.JTextField" name="txtFieldVencimento">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="01/01/2021"/>
+                    <Property name="toolTipText" type="java.lang.String" value="vencimento do carn&#xea;"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel9">
@@ -533,6 +548,7 @@
                         <StringItem index="3" value="Item 4"/>
                       </StringArray>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="valor do plano"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -553,6 +569,7 @@
                         <StringItem index="3" value="Item 4"/>
                       </StringArray>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="estado do cliente"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -564,6 +581,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtFieldObs">
+                  <Properties>
+                    <Property name="toolTipText" type="java.lang.String" value="observa&#xe7;&#xe3;o"/>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel12">
                   <Properties>
@@ -580,6 +600,7 @@
                         <StringItem index="3" value="Item 4"/>
                       </StringArray>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="cidade do cliente"/>
                   </Properties>
                   <Events>
                     <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="CBCidadeHierarchyChanged"/>
@@ -606,6 +627,7 @@
                         <StringItem index="3" value="Item 4"/>
                       </StringArray>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="bairro do cliente"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
