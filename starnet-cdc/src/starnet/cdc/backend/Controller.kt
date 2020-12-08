@@ -95,4 +95,23 @@ class Controller {
             clientesEntity.editClientes(cliente, oldDoc)
         }
     }
+
+    fun getClientesDeTodasAsCidades(): ArrayList<clientesFrontEnd> {
+        val clientesEntity = clientesEntity()
+        val Clientes:ArrayList<clientes> = clientesEntity.getClientesEntityOfAllCities()
+        val clientesConvertidos = ArrayList<clientesFrontEnd>()
+        for (x in 0 until Clientes.size) {
+            val cliente = clientesFrontEnd()
+            cliente.nome = Clientes[x].nome
+            cliente.documento = Clientes[x].documento
+            cliente.vencimento = Clientes[x].vencimento
+            cliente.valor = Conversao.converterValorDoPlano(Clientes[x])
+            cliente.estado = Clientes[x].estado
+            cliente.observacao = Clientes[x].observacao
+            cliente.cidade = Clientes[x].cidade
+            cliente.bairro = Clientes[x].bairro
+            clientesConvertidos.add(cliente)
+        }
+        return clientesConvertidos
+    }
 }
