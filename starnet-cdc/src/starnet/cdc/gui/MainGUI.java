@@ -17,6 +17,7 @@ import starnet.cdc.database.dao.bairroTable;
 import starnet.cdc.database.dao.cidadeTable;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -76,6 +77,10 @@ public class MainGUI extends javax.swing.JFrame {
         this.CBValor.addItem("R$ 150,00");
         this.CBValor.addItem("R$ 180,00");
         this.CBValor.addItem("R$ 200,00");
+
+        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+        jTable1.setRowSorter(new TableRowSorter(model));
+
         sync();
         tableInput();
     }
