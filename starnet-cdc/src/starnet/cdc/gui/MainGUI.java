@@ -64,9 +64,9 @@ public class MainGUI extends javax.swing.JFrame {
         this.CBValor.removeAllItems();
 
         //Adicionando itens aos ComboBox's
+        this.CBPesquisaEstado.addItem(Estado.TODOS.toString());
         this.CBPesquisaEstado.addItem(Estado.ATIVO.toString());
         this.CBPesquisaEstado.addItem(Estado.INATIVO.toString());
-        this.CBPesquisaEstado.addItem(Estado.TODOS.toString());
         this.CBEstado.addItem(Estado.ATIVO.toString());
         this.CBEstado.addItem(Estado.INATIVO.toString());
 

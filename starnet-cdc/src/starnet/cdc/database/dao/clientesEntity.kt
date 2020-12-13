@@ -24,9 +24,9 @@ class clientesEntity {
         var rs:ResultSet? = null
         try{
             if (estado.toString() == "TODOS") {
-                statement = con.prepareStatement("SELECT * FROM clientes")
+                statement = con.prepareStatement("SELECT * FROM clientes ORDER BY (nome)")
             } else {
-                statement = con.prepareStatement("SELECT * FROM clientes WHERE estado = ?")
+                statement = con.prepareStatement("SELECT * FROM clientes WHERE estado = ? ORDER BY (nome)")
                 statement.setBoolean(1, estado.estadoToBoolean(estado))
             }
 
@@ -72,10 +72,10 @@ class clientesEntity {
 
         try{
             if (estado.toString() == "TODOS") {
-                statement = con.prepareStatement("SELECT * FROM clientes WHERE cidade = ?")
+                statement = con.prepareStatement("SELECT * FROM clientes WHERE cidade = ? ORDER BY (nome)")
                 statement.setString(1, cidade)
             } else {
-                statement = con.prepareStatement("SELECT * FROM clientes WHERE cidade = ? AND estado = ?")
+                statement = con.prepareStatement("SELECT * FROM clientes WHERE cidade = ? AND estado = ? ORDER BY (nome)")
                 statement.setString(1, cidade)
                 statement.setBoolean(2, estado.estadoToBoolean(estado))
             }
@@ -122,11 +122,11 @@ class clientesEntity {
 
         try{
             if (estado.toString() == "TODOS") {
-                statement = con.prepareStatement("SELECT * FROM clientes WHERE cidade = ? AND bairro = ?")
+                statement = con.prepareStatement("SELECT * FROM clientes WHERE cidade = ? AND bairro = ? ORDER BY (nome)")
                 statement.setString(1, cidade)
                 statement.setString(2, bairro)
             } else {
-                statement = con.prepareStatement("SELECT * FROM clientes WHERE cidade = ? AND bairro = ? AND estado = ?")
+                statement = con.prepareStatement("SELECT * FROM clientes WHERE cidade = ? AND bairro = ? AND estado = ? ORDER BY (nome)")
                 statement.setString(1, cidade)
                 statement.setString(2, bairro)
                 statement.setBoolean(3, estado.estadoToBoolean(estado))
