@@ -7,9 +7,11 @@ package starnet.cdc.gui;
 
 import starnet.cdc.StarnetCdc;
 import starnet.cdc.backend.PasswordConverter;
+import starnet.cdc.backend.Reference;
 import starnet.cdc.backend.validacao;
 import starnet.cdc.database.bean.contaLogada;
 import starnet.cdc.database.dao.login;
+import starnet.cdc.database.dao.versionGetter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,6 +56,17 @@ public class LoginGUI extends javax.swing.JFrame {
         }
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("starnet.png")));
+        versionGetter vg = new versionGetter();
+        String version = vg.version();
+        Reference rf = new Reference();
+        String versionFromDisc = rf.getVersionReference();
+        if (version != "null") {
+            if (!version.equals(versionFromDisc)) {
+                System.out.println(version.toString() != versionFromDisc.toString());
+                UpdateDialog dialog = new UpdateDialog(new javax.swing.JFrame(), true);
+                dialog.setVisible(true);
+            }
+        }
     }
 
     /**
