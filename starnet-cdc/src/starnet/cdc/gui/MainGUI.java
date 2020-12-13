@@ -78,9 +78,6 @@ public class MainGUI extends javax.swing.JFrame {
         this.CBValor.addItem("R$ 180,00");
         this.CBValor.addItem("R$ 200,00");
 
-        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
-        jTable1.setRowSorter(new TableRowSorter(model));
-
         sync();
         tableInput();
     }
@@ -558,11 +555,29 @@ public class MainGUI extends javax.swing.JFrame {
         ArrayList<clientesFrontEnd> clientes = new ArrayList<clientesFrontEnd>();
 
         if (cidade.getNome().equals("ALL")) {
-            clientes = ts.getClientesDeTodasAsCidades();
+            if (this.CBPesquisaEstado.getSelectedItem().toString().equals("TODOS")) {
+                clientes = ts.getClientesDeTodasAsCidades(Estado.TODOS);
+            } else if (this.CBPesquisaEstado.getSelectedItem().toString() == "ATIVO") {
+                clientes = ts.getClientesDeTodasAsCidades(Estado.ATIVO);
+            } else {
+                clientes = ts.getClientesDeTodasAsCidades(Estado.INATIVO);
+            }
         } else if (bairro.getNome().equals("ALL")) {
-            clientes = ts.getClientesDeTodosOsBairros(cidade);
+            if (this.CBPesquisaEstado.getSelectedItem().toString().equals("TODOS")) {
+                clientes = ts.getClientesDeTodosOsBairros(cidade, Estado.TODOS);
+            } else if (this.CBPesquisaEstado.getSelectedItem().toString() == "ATIVO") {
+                clientes = ts.getClientesDeTodosOsBairros(cidade, Estado.ATIVO);
+            } else {
+                clientes = ts.getClientesDeTodosOsBairros(cidade, Estado.INATIVO);
+            }
         } else {
-            clientes = ts.getClientes(bairro);
+            if (this.CBPesquisaEstado.getSelectedItem().toString().equals("TODOS")) {
+                clientes = ts.getClientes(bairro, Estado.TODOS);
+            } else if (this.CBPesquisaEstado.getSelectedItem().toString() == "ATIVO") {
+                clientes = ts.getClientes(bairro, Estado.ATIVO);
+            } else {
+                clientes = ts.getClientes(bairro, Estado.INATIVO);
+            }
         }
 
         DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
@@ -819,11 +834,30 @@ public class MainGUI extends javax.swing.JFrame {
         ArrayList<clientesFrontEnd> clientes = new ArrayList<clientesFrontEnd>();
 
         if (cidade.getNome().equals("ALL")) {
-            clientes = ts.getClientesDeTodasAsCidades();
+            if (this.CBPesquisaEstado.getSelectedItem().toString().equals("TODOS")) {
+                clientes = ts.getClientesDeTodasAsCidades(Estado.TODOS);
+            } else if (this.CBPesquisaEstado.getSelectedItem().toString() == "ATIVO") {
+                clientes = ts.getClientesDeTodasAsCidades(Estado.ATIVO);
+            } else {
+                clientes = ts.getClientesDeTodasAsCidades(Estado.INATIVO);
+            }
+
         } else if (bairro.getNome().equals("ALL")) {
-            clientes = ts.getClientesDeTodosOsBairros(cidade);
+            if (this.CBPesquisaEstado.getSelectedItem().toString().equals("TODOS")) {
+                clientes = ts.getClientesDeTodosOsBairros(cidade, Estado.TODOS);
+            } else if (this.CBPesquisaEstado.getSelectedItem().toString() == "ATIVO") {
+                clientes = ts.getClientesDeTodosOsBairros(cidade, Estado.ATIVO);
+            } else {
+                clientes = ts.getClientesDeTodosOsBairros(cidade, Estado.INATIVO);
+            }
         } else {
-            clientes = ts.getClientes(bairro);
+            if (this.CBPesquisaEstado.getSelectedItem().toString().equals("TODOS")) {
+                clientes = ts.getClientes(bairro, Estado.TODOS);
+            } else if (this.CBPesquisaEstado.getSelectedItem().toString() == "ATIVO") {
+                clientes = ts.getClientes(bairro, Estado.ATIVO);
+            } else {
+                clientes = ts.getClientes(bairro, Estado.INATIVO);
+            }
         }
         DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
         model.setNumRows(0);
