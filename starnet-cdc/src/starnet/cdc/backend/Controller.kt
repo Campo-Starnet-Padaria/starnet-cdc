@@ -5,6 +5,7 @@ Created on 20/11/2020
  */
 package starnet.cdc.backend
 
+import starnet.cdc.backend.enums.Estado
 import starnet.cdc.database.bean.bairro
 import starnet.cdc.database.bean.cidade
 import starnet.cdc.database.bean.clientes
@@ -13,9 +14,9 @@ import starnet.cdc.database.dao.clientesEntity
 
 class Controller {
     private val Conversao = Conversao()
-    fun getClientesDeTodosOsBairros(cidade: cidade):ArrayList<clientesFrontEnd>{
+    fun getClientesDeTodosOsBairros(cidade: cidade, estado:Estado):ArrayList<clientesFrontEnd>{
         val clientesEntity = clientesEntity()
-        val Clientes:ArrayList<clientes> = clientesEntity.getClientesEnetityOfCity(cidade.nome.toString())
+        val Clientes:ArrayList<clientes> = clientesEntity.getClientesEntityOfCity(cidade.nome.toString(), estado)
         val clientesConvertidos = ArrayList<clientesFrontEnd>()
         for (x in 0 until Clientes.size) {
             val cliente = clientesFrontEnd()
@@ -32,10 +33,10 @@ class Controller {
         return clientesConvertidos
     }
 
-    fun getClientes(bairro: bairro):ArrayList<clientesFrontEnd>{
+    fun getClientes(bairro: bairro, estado: Estado):ArrayList<clientesFrontEnd>{
         val clientesEntity = clientesEntity()
-        val Clientes:ArrayList<clientes> = clientesEntity.getClientesEnetityOfCity(bairro.cidade!!.nome.toString(),
-                bairro.nome.toString())
+        val Clientes:ArrayList<clientes> = clientesEntity.getClientesEntityOfCity(bairro.cidade!!.nome.toString(),
+                bairro.nome.toString(), estado)
         val clientesConvertidos = ArrayList<clientesFrontEnd>()
         for (x in 0 until Clientes.size) {
             val cliente = clientesFrontEnd()
@@ -97,9 +98,9 @@ class Controller {
         }
     }
 
-    fun getClientesDeTodasAsCidades(): ArrayList<clientesFrontEnd> {
+    fun getClientesDeTodasAsCidades(estado: Estado): ArrayList<clientesFrontEnd> {
         val clientesEntity = clientesEntity()
-        val Clientes:ArrayList<clientes> = clientesEntity.getClientesEntityOfAllCities()
+        val Clientes:ArrayList<clientes> = clientesEntity.getClientesEntityOfAllCities(estado)
         val clientesConvertidos = ArrayList<clientesFrontEnd>()
         for (x in 0 until Clientes.size) {
             val cliente = clientesFrontEnd()

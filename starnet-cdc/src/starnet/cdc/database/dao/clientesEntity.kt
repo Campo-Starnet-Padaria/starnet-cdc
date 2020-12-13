@@ -17,13 +17,19 @@ import javax.swing.JOptionPane
 
 class clientesEntity {
 
-    fun getClientesEntityOfAllCities():ArrayList<clientes>{
+    fun getClientesEntityOfAllCities(estado:Estado):ArrayList<clientes>{
         val clientes = ArrayList<clientes>()
         val con:Connection = conexao.conexao()
         var statement:PreparedStatement? = null
         var rs:ResultSet? = null
         try{
-            statement = con.prepareStatement("SELECT * FROM clientes")
+            if (estado.toString() == "TODOS") {
+                statement = con.prepareStatement("SELECT * FROM clientes")
+            } else {
+                statement = con.prepareStatement("SELECT * FROM clientes WHERE estado = ?")
+                statement.setBoolean(1, estado.estadoToBoolean(estado))
+            }
+
             rs = statement.executeQuery()
             while(rs.next()){
                 val state:Estado = if (rs.getBoolean("Estado")) {
@@ -58,15 +64,22 @@ class clientesEntity {
         }
     }
 
-    fun getClientesEnetityOfCity(cidade:String):ArrayList<clientes>{
+    fun getClientesEntityOfCity(cidade:String, estado: Estado):ArrayList<clientes>{
         val clientes = ArrayList<clientes>()
         val con:Connection = conexao.conexao()
         var statement:PreparedStatement? = null
         var rs:ResultSet? = null
 
         try{
-            statement = con.prepareStatement("SELECT * FROM clientes WHERE cidade = ?")
-            statement.setString(1, cidade)
+            if (estado.toString() == "TODOS") {
+                statement = con.prepareStatement("SELECT * FROM clientes WHERE cidade = ?")
+                statement.setString(1, cidade)
+            } else {
+                statement = con.prepareStatement("SELECT * FROM clientes WHERE cidade = ? AND estado = ?")
+                statement.setString(1, cidade)
+                statement.setBoolean(2, estado.estadoToBoolean(estado))
+            }
+
             rs = statement.executeQuery()
             while(rs.next()){
                 val state:Estado = if (rs.getBoolean("Estado")) {
@@ -101,16 +114,23 @@ class clientesEntity {
         }
     }
 
-    fun getClientesEnetityOfCity(cidade: String, bairro:String):ArrayList<clientes>{
+    fun getClientesEntityOfCity(cidade: String, bairro:String, estado:Estado):ArrayList<clientes>{
         val clientes = ArrayList<clientes>()
         val con:Connection = conexao.conexao()
         var statement:PreparedStatement? = null
         var rs:ResultSet? = null
 
         try{
-            statement = con.prepareStatement("SELECT * FROM clientes WHERE cidade = ? AND bairro = ?")
-            statement.setString(1, cidade)
-            statement.setString(2, bairro)
+            if (estado.toString() == "TODOS") {
+                statement = con.prepareStatement("SELECT * FROM clientes WHERE cidade = ? AND bairro = ?")
+                statement.setString(1, cidade)
+                statement.setString(2, bairro)
+            } else {
+                statement = con.prepareStatement("SELECT * FROM clientes WHERE cidade = ? AND bairro = ? AND estado = ?")
+                statement.setString(1, cidade)
+                statement.setString(2, bairro)
+                statement.setBoolean(3, estado.estadoToBoolean(estado))
+            }
             rs = statement.executeQuery()
             while(rs.next()){
                 val state:Estado = if (rs.getBoolean("Estado")) {
