@@ -54,16 +54,21 @@ public class AdminConfigGUI extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Configurações De Administrador");
 
+        jTextField1.setToolTipText("O nome deve ter apenas letras e deve estar entre 3 e 50");
+
         jLabel2.setText("Criar Novo Usuario");
 
         jLabel3.setText("Nome:");
 
         jLabel4.setText("Senha:");
 
+        jTextField2.setToolTipText("A senha deve ter o primeiro caractere como uma letra e os demais podem ser números também, deve estar entre 8 e 32");
+
         jLabel5.setText("Nivel De Acesso:");
 
         jSlider1.setMaximum(3);
         jSlider1.setMinimum(1);
+        jSlider1.setToolTipText("Niveis inicio = 1, meio = 2, fim = 3");
         jSlider1.setValue(1);
 
         btnCriar.setText("Criar");
@@ -75,7 +80,7 @@ public class AdminConfigGUI extends javax.swing.JFrame {
 
         btnDump.setForeground(new java.awt.Color(255, 0, 0));
         btnDump.setText("Dropar banco de dados");
-        btnDump.setToolTipText("Apagar o banco de dados");
+        btnDump.setToolTipText("Deleta TUDO, TUDO do banco de dados");
         btnDump.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDumpActionPerformed(evt);
