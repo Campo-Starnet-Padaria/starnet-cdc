@@ -22,6 +22,36 @@ public class LoginGUI extends javax.swing.JFrame {
      */
     contaLogada conta = new contaLogada();
     public LoginGUI() {
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("com.sun.java.swing.plaf.gtk.GTKLookAndFeel".equals(info.getClassName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                } else if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (UnsupportedLookAndFeelException e) {
+
+            System.out.println("Erro: " + e.getMessage());
+            e.printStackTrace();
+
+        } catch (ClassNotFoundException e) {
+
+            System.out.println("Erro: " + e.getMessage());
+            e.printStackTrace();
+
+        } catch (InstantiationException e) {
+
+            System.out.println("Erro: " + e.getMessage());
+            e.printStackTrace();
+
+        } catch (IllegalAccessException e) {
+
+            System.out.println("Erro: " + e.getMessage());
+            e.printStackTrace();
+        }
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("starnet.png")));
     }
