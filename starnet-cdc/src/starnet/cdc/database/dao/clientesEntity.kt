@@ -48,6 +48,7 @@ class clientesEntity {
                 val cliente = clientes()
                 cliente.nome = rs.getString("nome")
                 cliente.documento = rs.getString("documento")
+                cliente.cpf = rs.getString("cpf")
                 cliente.vencimento = rs.getString("vencimento")
                 cliente.valor = rs.getFloat("valor")
                 cliente.observacao = rs.getString("observacao")
@@ -98,6 +99,7 @@ class clientesEntity {
                 val cliente = clientes()
                 cliente.nome = rs.getString("nome")
                 cliente.documento = rs.getString("documento")
+                cliente.cpf = rs.getString("cpf")
                 cliente.vencimento = rs.getString("vencimento")
                 cliente.valor = rs.getFloat("valor")
                 cliente.observacao = rs.getString("observacao")
@@ -149,6 +151,7 @@ class clientesEntity {
                 val cliente = clientes()
                 cliente.nome = rs.getString("nome")
                 cliente.documento = rs.getString("documento")
+                cliente.cpf = rs.getString("cpf")
                 cliente.vencimento = rs.getString("vencimento")
                 cliente.valor = rs.getFloat("valor")
                 cliente.observacao = rs.getString("observacao")
@@ -169,21 +172,18 @@ class clientesEntity {
         val con:Connection = conexao.conexao();
         var statement:PreparedStatement? = null
         var check = false
-
-
-        //Um exemplo de inserção na classe clientes
-        // 'Ronsâgela De Souza Rodrigues', '6608755', '01/02/2021', '80.00', 'true', 'Testando no momento', 'Pouso Alegre', 'Árvore Grande'
         try {
-            statement = con.prepareStatement("INSERT INTO clientes (nome, documento, vencimento, valor, estado, observacao, cidade, bairro)" +
-                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
+            statement = con.prepareStatement("INSERT INTO clientes (nome, documento, cpf, vencimento, valor, estado, observacao, cidade, bairro)" +
+                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
             statement.setString(1, cliente.nome)
             statement.setString(2, cliente.documento)
-            statement.setString(3, cliente.vencimento)
-            statement.setFloat(4, cliente.valor!!)
-            statement.setBoolean(5, cliente.estado!!.estadoToBoolean(cliente.estado!!))
-            statement.setString(6, cliente.observacao)
-            statement.setString(7, cliente.cidade?.nome.toString())
-            statement.setString(8, cliente.bairro?.nome.toString())
+            statement.setString(3,cliente.cpf)
+            statement.setString(4, cliente.vencimento)
+            statement.setFloat(5, cliente.valor!!)
+            statement.setBoolean(6, cliente.estado!!.estadoToBoolean(cliente.estado!!))
+            statement.setString(7, cliente.observacao)
+            statement.setString(8, cliente.cidade?.nome.toString())
+            statement.setString(9, cliente.bairro?.nome.toString())
             check = statement.execute()
         } catch (erro:SQLException){
             JOptionPane.showMessageDialog(null, "Erro ao inserir cliente no banco de dados.", "Sem êxito", JOptionPane.ERROR_MESSAGE)
@@ -196,22 +196,19 @@ class clientesEntity {
         val con:Connection = conexao.conexao()
         var statement:PreparedStatement? = null
         var check = false
-
         try {
-            //UPDATE `starnet`.`clientes` SET `nome` = 'Ana Maria Meilheres', `documento` = '6610102', `vencimento` = '10/01/2021',
-            // `valor` = '150', `estado` = '0', `observacao` = 'ab', `cidade` = 'Pouso Alegre', `bairro` = 'Árvore Grande'
-            // WHERE (`documento` = '6610101');
-            statement = con.prepareStatement("UPDATE clientes SET nome = ?, documento = ?, vencimento = ?, valor = ?," +
-                    "estado = ?, observacao = ?, cidade = ?, bairro = ? WHERE (documento = ?)")
+            statement = con.prepareStatement("UPDATE clientes SET nome = ?, documento = ?, cpf = ? vencimento = ?, " +
+                    "valor = ?, estado = ?, observacao = ?, cidade = ?, bairro = ? WHERE (documento = ?)")
             statement.setString(1, cliente.nome)
             statement.setString(2, cliente.documento)
-            statement.setString(3, cliente.vencimento)
-            statement.setFloat(4, cliente.valor!!)
-            statement.setBoolean(5, cliente.estado!!.estadoToBoolean(cliente.estado!!))
-            statement.setString(6, cliente.observacao)
-            statement.setString(7, cliente.cidade!!.nome.toString())
-            statement.setString(8, cliente.bairro!!.nome.toString())
-            statement.setString(9,oldDoc)
+            statement.setString(3, cliente.cpf)
+            statement.setString(4, cliente.vencimento)
+            statement.setFloat(5, cliente.valor!!)
+            statement.setBoolean(6, cliente.estado!!.estadoToBoolean(cliente.estado!!))
+            statement.setString(7, cliente.observacao)
+            statement.setString(8, cliente.cidade!!.nome.toString())
+            statement.setString(9, cliente.bairro!!.nome.toString())
+            statement.setString(10,oldDoc)
             check = statement.execute()
         } catch (erro:SQLException){
             JOptionPane.showMessageDialog(null, "Erro não foi possível atualizar o cliente. Codigo do erro:\n$erro")

@@ -83,6 +83,7 @@ class Controller {
         //Convertendo um Cliente
         cliente.nome = clientesFrontEnd.nome
         cliente.documento = clientesFrontEnd.documento
+        cliente.cpf = clientesFrontEnd.cpf
         cliente.vencimento = clientesFrontEnd.vencimento
         cliente.valor = Conversao.converterValorDoPlano(clientesFrontEnd.valor!!)
         cliente.observacao = clientesFrontEnd.observacao
