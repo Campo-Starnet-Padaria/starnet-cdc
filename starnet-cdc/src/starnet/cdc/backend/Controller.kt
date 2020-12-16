@@ -22,6 +22,7 @@ class Controller {
             val cliente = clientesFrontEnd()
             cliente.nome = Clientes[x].nome
             cliente.documento = Clientes[x].documento
+            cliente.cpf = Clientes[x].cpf
             cliente.vencimento = Clientes[x].vencimento
             cliente.valor = Conversao.converterValorDoPlano(Clientes[x])
             cliente.estado = Clientes[x].estado
@@ -42,6 +43,7 @@ class Controller {
             val cliente = clientesFrontEnd()
             cliente.nome = Clientes[x].nome
             cliente.documento = Clientes[x].documento
+            cliente.cpf = Clientes[x].cpf
             cliente.vencimento = Clientes[x].vencimento
             cliente.valor = Conversao.converterValorDoPlano(Clientes[x])
             cliente.estado = Clientes[x].estado
@@ -61,6 +63,7 @@ class Controller {
         //Convertendo um cliente
         cliente.nome = clientesFrontEnd.nome
         cliente.documento = clientesFrontEnd.documento
+        cliente.cpf = clientesFrontEnd.cpf
         cliente.vencimento = clientesFrontEnd.vencimento
         cliente.valor = Conversao.converterValorDoPlano(clientesFrontEnd.valor!!)
         cliente.estado = clientesFrontEnd.estado
@@ -107,6 +110,7 @@ class Controller {
             val cliente = clientesFrontEnd()
             cliente.nome = Clientes[x].nome
             cliente.documento = Clientes[x].documento
+            cliente.cpf = Clientes[x].cpf
             cliente.vencimento = Clientes[x].vencimento
             cliente.valor = Conversao.converterValorDoPlano(Clientes[x])
             cliente.estado = Clientes[x].estado
