@@ -16,7 +16,9 @@ import starnet.cdc.database.bean.contaLogada;
 import starnet.cdc.database.dao.bairroTable;
 import starnet.cdc.database.dao.cidadeTable;
 
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.ArrayList;
@@ -50,7 +52,7 @@ public class MainGUI extends javax.swing.JFrame {
         }
         if (conta.getAcesso() == 1) {
             this.btnAddCidade.setVisible(false);
-            this.btnAddBairo.setVisible(false);
+            this.btnAddBairro.setVisible(false);
             this.jPanel4.setVisible(false);
         }
 
@@ -96,20 +98,13 @@ public class MainGUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnSair = new javax.swing.JButton();
         btnConfig = new javax.swing.JButton();
-        btnAddBairo = new javax.swing.JButton();
+        btnAddBairro = new javax.swing.JButton();
         btnAdminConfig = new javax.swing.JButton();
         btnAddCidade = new javax.swing.JButton();
         btnEstatistica = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        CBPesquisaCidade = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        CBPesquisaBairro = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        CBPesquisaEstado = new javax.swing.JComboBox<>();
-        btnPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
@@ -131,7 +126,17 @@ public class MainGUI extends javax.swing.JFrame {
         CBBairro = new javax.swing.JComboBox<>();
         btnCadastrar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        txtFieldCPF = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
+        CBPesquisaEstado = new javax.swing.JComboBox<>();
+        CBPesquisaBairro = new javax.swing.JComboBox<>();
+        CBPesquisaCidade = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         jTextField3.setText("jTextField3");
 
@@ -161,11 +166,11 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        btnAddBairo.setText("Adicionar Bairro");
-        btnAddBairo.setToolTipText("Acesso a adicionar bairro");
-        btnAddBairo.addActionListener(new java.awt.event.ActionListener() {
+        btnAddBairro.setText("Adicionar Bairro");
+        btnAddBairro.setToolTipText("Acesso a adicionar bairro");
+        btnAddBairro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddBairoActionPerformed(evt);
+                btnAddBairroActionPerformed(evt);
             }
         });
 
@@ -209,7 +214,7 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSair, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnConfig, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAddBairo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAddBairro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAdminConfig, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAddCidade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                     .addComponent(btnEstatistica, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -225,12 +230,12 @@ public class MainGUI extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 385, Short.MAX_VALUE)
                 .addComponent(btnEstatistica)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAddCidade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAddBairo)
+                .addComponent(btnAddBairro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnConfig)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -240,37 +245,16 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel3.setText("Cidade:");
-
-        CBPesquisaCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        CBPesquisaCidade.setToolTipText("após selecionar uma cidade clique em atualizar");
-
-        jLabel4.setText("Bairro:");
-
-        CBPesquisaBairro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        CBPesquisaBairro.setToolTipText("Após selecionar um bairro selecione o estado ou clique em pesquisar");
-
-        jLabel5.setText("Estado:");
-
-        CBPesquisaEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        btnPesquisar.setText("Pesquisar");
-        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarActionPerformed(evt);
-            }
-        });
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome", "Documento", "Vencimento", "Valor", "Estado", "Observação", "Cidade", "Bairro"
+                "Nome", "Documento", "CPF", "Vencimento", "Valor", "Estado", "Observação", "Cidade", "Bairro"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, true, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -316,7 +300,7 @@ public class MainGUI extends javax.swing.JFrame {
         jLabel12.setText("Cidade:");
 
         CBCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        CBCidade.setToolTipText("cidade do cliente lembre-se de clicar em atualizar para pegar os bairros");
+        CBCidade.setToolTipText("cidade do cliente");
 
         jLabel13.setText("Bairro:");
 
@@ -337,54 +321,62 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel14.setText("CPF:");
+
+        txtFieldCPF.setText("000.000.000-00");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFieldDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
+                        .addComponent(txtFieldDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFieldObs, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel8))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFieldVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(CBCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBBairro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(6, 6, 6)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCadastrar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CBBairro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBValor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CBValor, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(133, Short.MAX_VALUE))
+                        .addComponent(CBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFieldObs, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(txtFieldVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCadastrar)
+                        .addContainerGap(56, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,21 +389,27 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(txtFieldDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(txtFieldVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(CBValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(CBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel14)
+                    .addComponent(txtFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(txtFieldObs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(CBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9)
+                        .addComponent(CBValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(txtFieldObs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
                     .addComponent(CBCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(CBBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCadastrar)
                     .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(14, 14, 14))
         );
 
         jButton1.setText("Atualizar");
@@ -420,6 +418,62 @@ public class MainGUI extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
+
+        CBPesquisaEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        CBPesquisaBairro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBPesquisaBairro.setToolTipText("Após selecionar um bairro selecione o estado ou clique em pesquisar");
+
+        jLabel3.setText("Cidade:");
+
+        jLabel4.setText("Bairro:");
+
+        jLabel5.setText("Estado:");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CBPesquisaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addGap(12, 12, 12)
+                .addComponent(CBPesquisaBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CBPesquisaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnPesquisar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(CBPesquisaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CBPesquisaBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CBPesquisaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisar)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)))
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -430,45 +484,21 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CBPesquisaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CBPesquisaBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CBPesquisaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnPesquisar)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(57, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(CBPesquisaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(CBPesquisaBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(CBPesquisaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisar)
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -516,12 +546,12 @@ public class MainGUI extends javax.swing.JFrame {
         sync();
     }//GEN-LAST:event_btnAddCidadeActionPerformed
 
-    private void btnAddBairoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBairoActionPerformed
+    private void btnAddBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBairroActionPerformed
         // TODO add your handling code here:
         AddBairroGUI gui = new AddBairroGUI(this, true, cidades, vali);
         gui.setVisible(true);
         sync();
-    }//GEN-LAST:event_btnAddBairoActionPerformed
+    }//GEN-LAST:event_btnAddBairroActionPerformed
 
     private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
         // TODO add your handling code here:
@@ -606,6 +636,7 @@ public class MainGUI extends javax.swing.JFrame {
         clientesFrontEnd cliente = new clientesFrontEnd();
         cliente.setNome(this.txtFieldNome.getText());
         cliente.setDocumento(this.txtFieldDocumento.getText());
+        cliente.setCpf(this.txtFieldCPF.getText());
         cliente.setVencimento(this.txtFieldVencimento.getText());
         cliente.setValor(this.CBValor.getSelectedItem().toString());
         if (CBEstado.getSelectedItem() == "ATIVO") {
@@ -613,11 +644,8 @@ public class MainGUI extends javax.swing.JFrame {
         } else {
             cliente.setEstado(Estado.INATIVO);
         }
-        if (this.txtFieldObs.getText().isEmpty()) {
-            cliente.setObservacao("nulo");
-        } else {
-            cliente.setObservacao(this.txtFieldObs.getText());
-        }
+        cliente.setObservacao(this.txtFieldObs.getText());
+
         cidade.setNome(this.CBCidade.getSelectedItem().toString());
         bairro.setNome(this.CBBairro.getSelectedItem().toString());
         bairro.setCidade(cidade);
@@ -630,7 +658,8 @@ public class MainGUI extends javax.swing.JFrame {
             controller.alterarCliente(cliente, model.getValueAt(this.jTable1.getSelectedRow(), 1).toString());
             jTable1.getSelectionModel().clearSelection();
             this.txtFieldNome.setText("");
-            this.txtFieldDocumento.setText("6611111");
+            this.txtFieldDocumento.setText("66");
+            this.txtFieldCPF.setText("");
             this.txtFieldVencimento.setText("01/01/2021");
             this.txtFieldObs.setText("");
             this.btnCadastrar.setText("Cadastrar");
@@ -646,11 +675,11 @@ public class MainGUI extends javax.swing.JFrame {
         //Levando para o painel de adição/edição
         this.txtFieldNome.setText(model.getValueAt(this.jTable1.getSelectedRow(), 0).toString());
         this.txtFieldDocumento.setText(model.getValueAt(this.jTable1.getSelectedRow(), 1).toString());
-        this.txtFieldVencimento.setText(model.getValueAt(this.jTable1.getSelectedRow(), 2).toString());
-        this.txtFieldObs.setText(model.getValueAt(this.jTable1.getSelectedRow(), 5).toString());
+        this.txtFieldVencimento.setText(model.getValueAt(this.jTable1.getSelectedRow(), 3).toString());
+
         //comboBox
         ArrayList<String> valores = new ArrayList<String>();
-        String valorDaTabela = model.getValueAt(this.jTable1.getSelectedRow(), 3).toString();
+        String valorDaTabela = model.getValueAt(this.jTable1.getSelectedRow(), 4).toString();
         valores.add("R$ 80.0");
         valores.add("R$ 100.0");
         valores.add("R$ 120.0");
@@ -665,7 +694,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
         }
 
-        String valorEstadoDaTabela = model.getValueAt(this.jTable1.getSelectedRow(), 4).toString();
+        String valorEstadoDaTabela = model.getValueAt(this.jTable1.getSelectedRow(), 5).toString();
         ArrayList<String> valorEstado = new ArrayList<>();
         valorEstado.add("ATIVO");
         valorEstado.add("INATIVO");
@@ -679,7 +708,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         cidadeTable ct = new cidadeTable();
         ArrayList<cidade> cidade = new ArrayList<>();
-        String cidadeDoCliente = model.getValueAt(this.jTable1.getSelectedRow(), 6).toString();
+        String cidadeDoCliente = model.getValueAt(this.jTable1.getSelectedRow(), 7).toString();
         cidade.addAll(ct.getCidade());
         for (int c = 0; c < this.CBCidade.getItemCount(); c++) {
             if (cidadeDoCliente.equals(cidade.get(c).getNome())) {
@@ -690,8 +719,9 @@ public class MainGUI extends javax.swing.JFrame {
 
         bairroTable bt = new bairroTable();
         cidade city = new cidade();
+        syncBairro();
         ArrayList<bairro> bairro = new ArrayList<>();
-        String bairroDoCliente = model.getValueAt(this.jTable1.getSelectedRow(), 7).toString();
+        String bairroDoCliente = model.getValueAt(this.jTable1.getSelectedRow(), 8).toString();
         city.setNome(this.CBCidade.getSelectedItem().toString());
         bairro.addAll(bt.getBairros(city));
 
@@ -700,6 +730,13 @@ public class MainGUI extends javax.swing.JFrame {
                 this.CBBairro.setSelectedIndex(c);
                 break;
             }
+        }
+
+        try{
+            this.txtFieldObs.setText(model.getValueAt(this.jTable1.getSelectedRow(), 6).toString());
+            this.txtFieldCPF.setText(model.getValueAt(this.jTable1.getSelectedRow(), 2).toString());
+        } catch (Exception erro){
+            System.out.println("CPF ou Observação vazios");
         }
         this.btnCadastrar.setText("Re-Castrar");
     }//GEN-LAST:event_jTable1MouseClicked
@@ -717,6 +754,7 @@ public class MainGUI extends javax.swing.JFrame {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
         this.txtFieldNome.setText("");
+        this.txtFieldCPF.setText("");
         this.txtFieldDocumento.setText("66");
         this.txtFieldVencimento.setText("01/01/2021");
         this.txtFieldObs.setText("");
@@ -736,7 +774,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> CBPesquisaCidade;
     private javax.swing.JComboBox<String> CBPesquisaEstado;
     private javax.swing.JComboBox<String> CBValor;
-    private javax.swing.JButton btnAddBairo;
+    private javax.swing.JButton btnAddBairro;
     private javax.swing.JButton btnAddCidade;
     private javax.swing.JButton btnAdminConfig;
     private javax.swing.JButton btnCadastrar;
@@ -751,6 +789,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -763,9 +802,11 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField txtFieldCPF;
     private javax.swing.JTextField txtFieldDocumento;
     private javax.swing.JTextField txtFieldNome;
     private javax.swing.JTextField txtFieldObs;
@@ -822,6 +863,7 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }
 
+    //Entrada de fluxo do banco de dados vindos apartir da classe controller do backend
     public void tableInput(){
         cidade cidade = new cidade();
         cidade.setNome(this.CBPesquisaCidade.getSelectedItem().toString());
@@ -865,6 +907,7 @@ public class MainGUI extends javax.swing.JFrame {
             model.addRow(new Object[]{
                     clientes.get(c).getNome(),
                     clientes.get(c).getDocumento(),
+                    clientes.get(c).getCpf(),
                     clientes.get(c).getVencimento(),
                     clientes.get(c).getValor(),
                     clientes.get(c).getEstado(),

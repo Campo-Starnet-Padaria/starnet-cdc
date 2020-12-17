@@ -10,6 +10,7 @@ import starnet.cdc.backend.enums.Estado
 class clientesFrontEnd {
     var nome:String? = null
     var documento:String? = null
+    var cpf:String? = null
     var vencimento:String? = null
     var valor:String? = null
     var estado: Estado? = null

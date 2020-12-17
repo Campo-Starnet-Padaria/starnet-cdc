@@ -71,6 +71,12 @@ class validacao {
         return pattern.containsMatchIn(nome)
     }
 
+    fun validarCPF(cpf:String):Boolean{
+        val CPF:CharSequence = cpf
+        val pattern = Regex("^([0-9]{3}[.]){2}[0-9]{3}[-][0-9]{2}\$")
+        return pattern.containsMatchIn(CPF)
+    }
+
     fun check(cliente: clientes):Boolean {
         val errorClass = Error()
         var check = false

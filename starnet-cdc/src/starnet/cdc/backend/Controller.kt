@@ -5,6 +5,7 @@ Created on 20/11/2020
  */
 package starnet.cdc.backend
 
+import com.sun.security.ntlm.Client
 import starnet.cdc.backend.enums.Estado
 import starnet.cdc.database.bean.bairro
 import starnet.cdc.database.bean.cidade
@@ -16,12 +17,18 @@ class Controller {
     private val Conversao = Conversao()
     fun getClientesDeTodosOsBairros(cidade: cidade, estado:Estado):ArrayList<clientesFrontEnd>{
         val clientesEntity = clientesEntity()
+        val encripta = Encripta()
         val Clientes:ArrayList<clientes> = clientesEntity.getClientesEntityOfCity(cidade.nome.toString(), estado)
         val clientesConvertidos = ArrayList<clientesFrontEnd>()
         for (x in 0 until Clientes.size) {
             val cliente = clientesFrontEnd()
             cliente.nome = Clientes[x].nome
             cliente.documento = Clientes[x].documento
+            if(Clientes[x].cpf != null){
+                cliente.cpf = encripta.descriptografar(Clientes[x].cpf!!)
+            } else {
+                cliente.cpf = Clientes[x].cpf
+            }
             cliente.vencimento = Clientes[x].vencimento
             cliente.valor = Conversao.converterValorDoPlano(Clientes[x])
             cliente.estado = Clientes[x].estado
@@ -35,6 +42,7 @@ class Controller {
 
     fun getClientes(bairro: bairro, estado: Estado):ArrayList<clientesFrontEnd>{
         val clientesEntity = clientesEntity()
+        val encripta = Encripta()
         val Clientes:ArrayList<clientes> = clientesEntity.getClientesEntityOfCity(bairro.cidade!!.nome.toString(),
                 bairro.nome.toString(), estado)
         val clientesConvertidos = ArrayList<clientesFrontEnd>()
@@ -42,6 +50,11 @@ class Controller {
             val cliente = clientesFrontEnd()
             cliente.nome = Clientes[x].nome
             cliente.documento = Clientes[x].documento
+            if(Clientes[x].cpf != null){
+                cliente.cpf = encripta.descriptografar(Clientes[x].cpf!!)
+            } else {
+                cliente.cpf = Clientes[x].cpf
+            }
             cliente.vencimento = Clientes[x].vencimento
             cliente.valor = Conversao.converterValorDoPlano(Clientes[x])
             cliente.estado = Clientes[x].estado
@@ -57,6 +70,8 @@ class Controller {
         val cliente = clientes()
         val clientesEntity = clientesEntity()
         val vali = validacao()
+        val encripta = Encripta()
+        val erro = Error()
 
         //Convertendo um cliente
         cliente.nome = clientesFrontEnd.nome
@@ -67,6 +82,14 @@ class Controller {
         cliente.observacao = clientesFrontEnd.observacao
         cliente.cidade = clientesFrontEnd.cidade
         cliente.bairro = clientesFrontEnd.bairro
+
+        if (clientesFrontEnd.cpf!!.isNotEmpty()) {
+            if (vali.validarCPF(clientesFrontEnd.cpf.toString())) {
+                cliente.cpf = encripta.encriptar2(clientesFrontEnd.cpf.toString())
+            } else {
+                erro.openError("CPF")
+            }
+        }
 
         //Validando
         val check = vali.check(cliente)
@@ -79,6 +102,7 @@ class Controller {
         val cliente = clientes()
         val clientesEntity = clientesEntity()
         val vali = validacao()
+        val encripta = Encripta()
 
         //Convertendo um Cliente
         cliente.nome = clientesFrontEnd.nome
@@ -90,6 +114,12 @@ class Controller {
         cliente.cidade = clientesFrontEnd.cidade
         cliente.bairro = clientesFrontEnd.bairro
 
+        if (cliente.cpf!!.isNotEmpty()) {
+            if (vali.validarCPF(cliente.cpf.toString())) {
+                cliente.cpf = encripta.encriptar2(clientesFrontEnd.cpf.toString())
+            }
+        }
+
         //Validando
         val check = vali.check(cliente)
         if (check) {
@@ -100,12 +130,18 @@ class Controller {
 
     fun getClientesDeTodasAsCidades(estado: Estado): ArrayList<clientesFrontEnd> {
         val clientesEntity = clientesEntity()
+        val encripta = Encripta()
         val Clientes:ArrayList<clientes> = clientesEntity.getClientesEntityOfAllCities(estado)
         val clientesConvertidos = ArrayList<clientesFrontEnd>()
         for (x in 0 until Clientes.size) {
             val cliente = clientesFrontEnd()
             cliente.nome = Clientes[x].nome
             cliente.documento = Clientes[x].documento
+            if(Clientes[x].cpf != null){
+                cliente.cpf = encripta.descriptografar(Clientes[x].cpf!!)
+            } else {
+                cliente.cpf = Clientes[x].cpf
+            }
             cliente.vencimento = Clientes[x].vencimento
             cliente.valor = Conversao.converterValorDoPlano(Clientes[x])
             cliente.estado = Clientes[x].estado
