@@ -217,4 +217,48 @@ class clientesEntity {
             return check
         }
     }
+
+    fun getClientesByCPF(): ArrayList<clientes> {
+        val con:Connection = conexao.conexao()
+        var statement:PreparedStatement? = null
+        var rs:ResultSet? = null
+        val clientes = ArrayList<clientes>()
+        var check = false
+        try {
+            statement = con.prepareStatement("SELECT * FROM clientes WHERE cpf != 'null'")
+            rs = statement.executeQuery()
+            while(rs.next()){
+                val state:Estado = if (rs.getBoolean("Estado")) {
+                    Estado.ATIVO
+                } else {
+                    Estado.INATIVO
+                }
+
+                val cidade = cidade()
+                cidade.nome = rs.getString("cidade")
+
+                val bairro = bairro()
+                bairro.cidade = cidade
+                bairro.nome = rs.getString("bairro")
+
+                val cliente = clientes()
+                cliente.nome = rs.getString("nome")
+                cliente.documento = rs.getString("documento")
+                cliente.cpf = rs.getString("cpf")
+                cliente.vencimento = rs.getString("vencimento")
+                cliente.valor = rs.getFloat("valor")
+                cliente.observacao = rs.getString("observacao")
+                cliente.bairro = bairro
+                cliente.cidade = cidade
+                cliente.estado = state
+                clientes.add(cliente)
+            }
+        } catch (erro:SQLException){
+            JOptionPane.showMessageDialog(null, "Não foi possível adquirir, ou não existe\num cliente com esse CPF.\nFavor caso primeira opção contar o Programador.",
+            "Erro", JOptionPane.ERROR)
+        } finally {
+            conexao.fecharConexao(con, statement, rs)
+        }
+        return clientes
+    }
 }

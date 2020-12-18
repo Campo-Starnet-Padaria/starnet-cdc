@@ -152,4 +152,30 @@ class Controller {
         }
         return clientesConvertidos
     }
+
+    fun getClientByCPF(cpf:String): ArrayList<clientesFrontEnd> {
+        val clientesEntity = clientesEntity()
+        val encripta = Encripta()
+        val Clientes: ArrayList<clientes> = clientesEntity.getClientesByCPF()
+        val conversao = Conversao()
+        val clienteConvertido = ArrayList<clientesFrontEnd>()
+
+        for (elemento in Clientes) {
+            if (cpf == encripta.descriptografar(elemento.cpf!!)) {
+                val cliente = clientesFrontEnd()
+                cliente.nome = elemento.nome
+                cliente.documento = elemento.documento
+                cliente.cpf = encripta.descriptografar(elemento.cpf!!)
+                cliente.vencimento = elemento.vencimento
+                cliente.valor = conversao.converterValorDoPlano(elemento)
+                cliente.estado = elemento.estado
+                cliente.cidade = elemento.cidade
+                cliente.bairro = elemento.bairro
+                cliente.observacao = elemento.observacao
+                clienteConvertido.add(cliente)
+                break
+            }
+        }
+        return clienteConvertido
+    }
 }
