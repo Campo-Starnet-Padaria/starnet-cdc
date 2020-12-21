@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/stanet-cdc.iml" filepath="$PROJECT_DIR$/stanet-cdc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/starnet-cdc.iml" filepath="$PROJECT_DIR$/starnet-cdc.iml" />
     </modules>
   </component>
 </project>
