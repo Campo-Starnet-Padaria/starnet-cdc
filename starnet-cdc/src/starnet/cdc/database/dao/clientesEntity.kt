@@ -186,6 +186,7 @@ class clientesEntity {
             statement.setString(9, cliente.bairro?.nome.toString())
             check = statement.execute()
         } catch (erro:SQLException){
+            println(erro)
             JOptionPane.showMessageDialog(null, "Erro ao inserir cliente no banco de dados.", "Sem êxito", JOptionPane.ERROR_MESSAGE)
         } finally {
             conexao.fecharConexao(con, statement)
