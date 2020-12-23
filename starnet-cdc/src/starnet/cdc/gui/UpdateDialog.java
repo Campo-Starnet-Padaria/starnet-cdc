@@ -52,7 +52,7 @@ public class UpdateDialog extends javax.swing.JDialog {
         jLabel1.setText("Atualização disponivel");
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton1.setText("Acessar o site para atualizar");
+        jButton1.setText("Inicar o Elevador para a atualização");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -62,7 +62,7 @@ public class UpdateDialog extends javax.swing.JDialog {
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTextArea1.setRows(5);
-        jTextArea1.setText("Depois de baixar a atualização.\nExtraia o arquivo da atualização. (Botão direito, extrair aqui)\nExclua a pasta do programa velho.\nE coloque no lugar a pasta da extração.");
+        jTextArea1.setText("Atenção Momentaneamente o Elevador só funciona no \nwindows. Caso esteja no linux faça a atualização de mesma\nforma que fazia antes. LEMBRANDO que agora a pasta \nStarnet-CDC não existe mais por causa do Elevador.");
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -70,18 +70,15 @@ public class UpdateDialog extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 89, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(84, 84, 84))
+                .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,12 +97,12 @@ public class UpdateDialog extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Desktop desk = java.awt.Desktop.getDesktop();
         try {
-            desk.browse(new java.net.URI("https://github.com/FelipeAlafy/stanet-cdc/releases/latest"));
-        } catch (URISyntaxException | IOException ex) {
-            Logger.getLogger(UpdateDialog.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+            Runtime.getRuntime().exec("cmd.exe /c start elevador.exe");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -25,22 +25,17 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="388" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="89" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -76,7 +71,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Acessar o site para atualizar"/>
+        <Property name="text" type="java.lang.String" value="Inicar o Elevador para a atualiza&#xe7;&#xe3;o"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -96,7 +91,7 @@
               <Font name="Dialog" size="14" style="0"/>
             </Property>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="Depois de baixar a atualiza&#xe7;&#xe3;o.&#xa;Extraia o arquivo da atualiza&#xe7;&#xe3;o. (Bot&#xe3;o direito, extrair aqui)&#xa;Exclua a pasta do programa velho.&#xa;E coloque no lugar a pasta da extra&#xe7;&#xe3;o."/>
+            <Property name="text" type="java.lang.String" value="Aten&#xe7;&#xe3;o Momentaneamente o Elevador s&#xf3; funciona no &#xa;windows. Caso esteja no linux fa&#xe7;a a atualiza&#xe7;&#xe3;o de mesma&#xa;forma que fazia antes. LEMBRANDO que agora a pasta &#xa;Starnet-CDC n&#xe3;o existe mais por causa do Elevador."/>
           </Properties>
         </Component>
       </SubComponents>
