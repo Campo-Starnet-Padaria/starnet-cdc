@@ -755,7 +755,8 @@ public class MainGUI extends javax.swing.JFrame {
     private void btnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFActionPerformed
         // TODO add your handling code here:
         gerarPDF gerar = new gerarPDF();
-        gerar.gerarPDF();
+        Controller controller = new Controller();
+        gerar.gerarPDF(controller.getClientesDeTodasAsCidades(Estado.TODOS));
     }//GEN-LAST:event_btnPDFActionPerformed
 
     /**
