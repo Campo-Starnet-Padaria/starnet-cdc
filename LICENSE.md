@@ -22,3 +22,6 @@ Exclusão: Os programas externos como Wget e Unzip podem ser usados desde que si
 Exclusão: as classes Disco.java e PasswordConverter.java deve-se verificar a disponibilidade com o autor.
 
 Adição: Uma liberação é concedida a Felipe Alafy Rodrigues Silva para que use o programa Starnet-CDC em seu portifolio.
+
+Em caso de desrespeito o Elemento(a) está sujeito, a ser chamado judicialmente pela empresa Starnet Telecom.
+Por descumprir com os termos contidos nesse arquivo LICENSE.
