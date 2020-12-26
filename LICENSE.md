@@ -1,5 +1,5 @@
 Atenção este arquivo LICENSE.md.
-
+Language Pt-Br
 # Todos os diretos estão reservados a (Starnet Telecom) C 2020
 ## As exceções ao direito autoral são as classes/arquivos a seguir:
 * Disco.java //Sobre direito do Autor: FelipeAlafy, Importado de outro projeto
