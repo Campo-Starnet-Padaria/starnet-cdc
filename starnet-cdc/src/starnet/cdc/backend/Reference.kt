@@ -9,7 +9,7 @@ class Reference {
     var dbString:String? = null
     var versionReference:String? = null
     val disc = Disco()
-    val references = arrayListOf("jdbc:mysql://25.49.100.193:4096/starnet", "2.9")
+    val references = arrayListOf("jdbc:mysql://25.49.100.193:4096/starnet", "3.0")
     constructor(){
         disc.createFolder("config")
         if (!disc.existsFile("config", "config.cfg")) {
