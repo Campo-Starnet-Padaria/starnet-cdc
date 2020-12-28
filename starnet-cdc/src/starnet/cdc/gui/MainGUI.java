@@ -762,6 +762,8 @@ public class MainGUI extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser();
         chooser.setMultiSelectionEnabled(false);
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        JOptionPane.showMessageDialog(null, "Atenção na tela a seguir selecione o local para salvar o pdf,\nRecomendado usar a pasta Desktop.\n",
+                "Info", JOptionPane.INFORMATION_MESSAGE);
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = chooser.getSelectedFile();
             Path local = file.toPath();
