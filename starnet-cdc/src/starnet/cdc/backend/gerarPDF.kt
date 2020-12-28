@@ -8,6 +8,9 @@ import starnet.cdc.database.bean.clientesFrontEnd
 import java.io.FileOutputStream
 import java.io.IOException
 import com.itextpdf.text.Paragraph
+import jdk.nashorn.internal.scripts.JO
+import java.awt.Desktop
+import java.io.File
 import java.nio.file.Path
 import javax.swing.JOptionPane
 
@@ -61,7 +64,7 @@ class gerarPDF {
                 table.addCell(element.bairro!!.nome)
             }
             documento.add(table)
-            println("PDF Criado")
+            Desktop.getDesktop().open(File("$local\\Clientes.pdf"))
         } catch (erro:DocumentException) {
             System.err.println(erro.message)
             JOptionPane.showMessageDialog(null, erro.message, "Erro", JOptionPane.ERROR_MESSAGE)
