@@ -1,38 +1,53 @@
 package starnet.cdc.backend
 
 import com.itextpdf.text.*
-import com.itextpdf.text.List
+import com.itextpdf.text.pdf.PdfPCell
 import com.itextpdf.text.pdf.PdfPTable
 import com.itextpdf.text.pdf.PdfWriter
-import com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets
 import starnet.cdc.database.bean.clientesFrontEnd
 import java.io.FileOutputStream
 import java.io.IOException
-import com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table
-
-
+import com.itextpdf.text.Paragraph
+import java.nio.file.Path
+import javax.swing.JOptionPane
 
 
 class gerarPDF {
-    fun gerarPDF(clientes:ArrayList<clientesFrontEnd>){
-        var documento = Document()
-
+    fun gerarPDF(clientes:ArrayList<clientesFrontEnd>, local:Path){
+        val documento = Document()
+        documento.pageSize = PageSize.A4.rotate();
         try {
-            PdfWriter.getInstance(documento, FileOutputStream("C:\\Users\\falaf\\Documents\\working\\stanet-cdc\\PDFOla2.pdf"))
+            PdfWriter.getInstance(documento, FileOutputStream("$local\\Clientes.pdf"))
             documento.open()
-            documento.add(Paragraph("Starnet Clientes com carnê."))
-            val table = PdfPTable(9)
-            table.widthPercentage = 80F;
-            table.addCell("Nome")
-            table.addCell("Documento")
-            table.addCell("CPF")
-            table.addCell("Valor")
-            table.addCell("Vencimento")
-            table.addCell("Estado")
-            table.addCell("Observação")
-            table.addCell("Cidade")
-            table.addCell("Bairro")
 
+            val f = Font(Font.FontFamily.COURIER, 20F, Font.BOLD)
+            val p1 = Paragraph("Starnet carnês de clientes", f)
+            p1.alignment = Element.ALIGN_CENTER
+            documento.add(p1)
+
+            val table = PdfPTable(9)
+            table.paddingTop = 10F
+            table.widthPercentage = 100F;
+            val cell = PdfPCell()
+            cell.fixedHeight = 20F
+            cell.phrase = Phrase("Nome")
+            table.addCell(cell)
+            cell.phrase = Phrase("Documento")
+            table.addCell(cell)
+            cell.phrase = Phrase("CPF")
+            table.addCell(cell)
+            cell.phrase = Phrase("Valor")
+            table.addCell(cell)
+            cell.phrase = Phrase("Vencimento")
+            table.addCell(cell)
+            cell.phrase = Phrase("Estado")
+            table.addCell(cell)
+            cell.phrase = Phrase("Observação")
+            table.addCell(cell)
+            cell.phrase = Phrase("Cidade")
+            table.addCell(cell)
+            cell.phrase = Phrase("Bairro")
+            table.addCell(cell)
 
             for ((index, element) in clientes.withIndex()) {
                 table.addCell(element.nome)
@@ -44,13 +59,15 @@ class gerarPDF {
                 table.addCell(element.observacao)
                 table.addCell(element.cidade!!.nome)
                 table.addCell(element.bairro!!.nome)
-                if (index > 10) break
             }
             documento.add(table)
+            println("PDF Criado")
         } catch (erro:DocumentException) {
             System.err.println(erro.message)
+            JOptionPane.showMessageDialog(null, erro.message, "Erro", JOptionPane.ERROR_MESSAGE)
         } catch(erro: IOException) {
             System.err.println(erro.message)
+            JOptionPane.showMessageDialog(null, erro.message, "Erro", JOptionPane.ERROR_MESSAGE)
         } finally {
             documento.close()
         }

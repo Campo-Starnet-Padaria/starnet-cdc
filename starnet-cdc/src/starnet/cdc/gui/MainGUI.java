@@ -17,11 +17,14 @@ import starnet.cdc.database.bean.contaLogada;
 import starnet.cdc.database.dao.bairroTable;
 import starnet.cdc.database.dao.cidadeTable;
 
+import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 
@@ -756,7 +759,16 @@ public class MainGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         gerarPDF gerar = new gerarPDF();
         Controller controller = new Controller();
-        gerar.gerarPDF(controller.getClientesDeTodasAsCidades(Estado.TODOS));
+        JFileChooser chooser = new JFileChooser();
+        chooser.setMultiSelectionEnabled(false);
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            Path local = file.toPath();
+            gerar.gerarPDF(controller.getClientesDeTodasAsCidades(Estado.TODOS), local);
+        } else {
+            JOptionPane.showMessageDialog(this, "Arquivo Não exportado", "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnPDFActionPerformed
 
     /**
