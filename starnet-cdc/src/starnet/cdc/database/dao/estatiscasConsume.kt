@@ -8,6 +8,7 @@ package starnet.cdc.database.dao
 import starnet.cdc.database.bean.estatisticas
 import java.sql.Connection
 import starnet.cdc.backend.Error
+import starnet.cdc.database.db.mysql
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException

@@ -3,7 +3,7 @@
  @author Felipe Alafy
  Created on 20/11/2020
  */
-package starnet.cdc.database.dao;
+package starnet.cdc.database.db;
 
 import starnet.cdc.backend.Reference;
 
@@ -11,12 +11,12 @@ import java.sql.*;
 
 public class mysql {
     private static final Reference reference = new Reference();
-    public static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String URL = reference.getDbString();
     private static final String USER = reference.getDbuser();
     private static final String PASS = reference.getDbpass();
 
-    public static Connection conexao() throws ClassNotFoundException, SQLException {
+    public static Connection conexao() throws SQLException, ClassNotFoundException {
         Class.forName(DRIVER);
         return DriverManager.getConnection(URL, USER, PASS);
     }

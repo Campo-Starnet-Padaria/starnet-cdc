@@ -9,6 +9,7 @@ import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.SQLException
 import starnet.cdc.backend.Error
+import starnet.cdc.database.db.mysql
 
 class DropDB {
     fun DropDB(){
