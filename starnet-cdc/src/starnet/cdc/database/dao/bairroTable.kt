@@ -16,7 +16,7 @@ import javax.swing.JOptionPane
 
 class bairroTable {
     fun inserirBairro(bairro:bairro){
-        val con:Connection = conexao.conexao()
+        val con:Connection = mysql.conexao()
         var statement:PreparedStatement? = null
         try {
             statement = con.prepareStatement("INSERT INTO bairro (cidade, nome) VALUES (?, ?)")
@@ -29,13 +29,13 @@ class bairroTable {
             JOptionPane.showMessageDialog(null, "O bairro: ${bairro.nome} já existe em " +
                     "${bairro.cidade!!.nome} tente colocar II ao final do nome.")
         } finally {
-            conexao.fecharConexao(con, statement)
+            mysql.fecharConexao(con, statement)
         }
     }
 
     fun getBairros(cidade: cidade): ArrayList<bairro>{
         val bairros = ArrayList<bairro>()
-        val con:Connection = conexao.conexao()
+        val con:Connection = mysql.conexao()
         var statement:PreparedStatement? = null
         var rs:ResultSet? = null
 
@@ -54,7 +54,7 @@ class bairroTable {
         } catch (erro: SQLException){
             JOptionPane.showMessageDialog(null, "Erro ao pegar os bairros do banco de dados\n:$erro")
         } finally {
-            conexao.fecharConexao(con, statement, rs)
+            mysql.fecharConexao(con, statement, rs)
             return bairros
         }
     }

@@ -104,4 +104,8 @@ public class Disco {
         }
         return data;
     }
+
+    public boolean existsFolder(String s) {
+        return Files.exists(Paths.get("config/"));
+    }
 }

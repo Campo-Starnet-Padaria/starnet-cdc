@@ -16,7 +16,7 @@ import java.sql.SQLException
 class login {
     fun login(conta: contaLogada): contaLogada {
         val contaFinal = contaLogada()
-        val con:Connection = conexao.conexao()
+        val con:Connection = mysql.conexao()
         var statement:PreparedStatement? = null
         var rs:ResultSet? = null
         val errorClass = Error()
@@ -35,14 +35,14 @@ class login {
         } catch (error:SQLException){
             errorClass.openError("erro de SQL em ${error.toString()}")
         } finally {
-            conexao.fecharConexao(con, statement, rs)
+            mysql.fecharConexao(con, statement, rs)
             return contaFinal
         }
     }
 
     fun createUser(conta: contaLogada):Boolean{
         val encripta = Encripta()
-        val con:Connection = conexao.conexao()
+        val con:Connection = mysql.conexao()
         var statement:PreparedStatement? = null
         var rs:ResultSet? = null
         val errorClass = Error()
@@ -58,7 +58,7 @@ class login {
             errorClass.openError(" $erro")
             return false
         } finally {
-            conexao.fecharConexao(con, statement, rs)
+            mysql.fecharConexao(con, statement, rs)
         }
     }
 }

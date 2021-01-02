@@ -15,7 +15,7 @@ import javax.swing.JOptionPane
 
 class cidadeTable {
     fun inserirCidades(city: cidade){
-        val con:Connection = conexao.conexao()
+        val con:Connection = mysql.conexao()
         var statement:PreparedStatement? = null
         try {
             statement = con.prepareStatement("INSERT INTO cidade VALUES (?)")
@@ -26,12 +26,12 @@ class cidadeTable {
             JOptionPane.showMessageDialog(null, "Não é possível adicionar cidades com o mesmo nome!",
             "Info", JOptionPane.WARNING_MESSAGE)
         } finally {
-            conexao.fecharConexao(con, statement)
+            mysql.fecharConexao(con, statement)
         }
     }
 
     fun getCidade():ArrayList<cidade>{
-        val con:Connection = conexao.conexao()
+        val con:Connection = mysql.conexao()
         var statement:PreparedStatement? = null
         var rs:ResultSet? = null
         val cidades = ArrayList<cidade>()
@@ -46,7 +46,7 @@ class cidadeTable {
         } catch (erro:SQLException){
             JOptionPane.showMessageDialog(null, "Não foi possível pegar as cidades do banco de dados!")
         } finally {
-            conexao.fecharConexao(con, statement, rs)
+            mysql.fecharConexao(con, statement, rs)
             return cidades
         }
     }

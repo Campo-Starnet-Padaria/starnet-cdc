@@ -9,12 +9,12 @@ import starnet.cdc.backend.Reference;
 
 import java.sql.*;
 
-public class conexao {
+public class mysql {
     private static final Reference reference = new Reference();
     public static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String URL = reference.getDbString();
-    private static final String USER = "starnetcdc";
-    private static final String PASS = "zLatPeXfFlY62rH1";
+    private static final String USER = reference.getDbuser();
+    private static final String PASS = reference.getDbpass();
 
     public static Connection conexao() throws ClassNotFoundException, SQLException {
         Class.forName(DRIVER);

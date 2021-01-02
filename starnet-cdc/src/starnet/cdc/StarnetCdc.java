@@ -12,9 +12,4 @@ public class StarnetCdc {
         LoginGUI logui = new LoginGUI();
         logui.setVisible(true);
     }
-
-    public static void restart(){
-        LoginGUI logui = new LoginGUI();
-        logui.setVisible(true);
-    }
 }
