@@ -15,7 +15,7 @@ import java.sql.SQLException
 class estatiscasConsume {
     fun getEstatisticas():estatisticas{
         val es = estatisticas()
-        val con:Connection = conexao.conexao()
+        val con:Connection = mysql.conexao()
         var statement:PreparedStatement? = null
         var rs:ResultSet? = null
 
@@ -43,7 +43,7 @@ class estatiscasConsume {
             val erro = Error()
             erro.openError(" adquirir estatisticas:\n$error")
         } finally {
-            conexao.fecharConexao(con, statement, rs)
+            mysql.fecharConexao(con, statement, rs)
             return es
         }
     }

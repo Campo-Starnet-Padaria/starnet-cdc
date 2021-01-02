@@ -19,7 +19,7 @@ class clientesEntity {
 
     fun getClientesEntityOfAllCities(estado:Estado):ArrayList<clientes>{
         val clientes = ArrayList<clientes>()
-        val con:Connection = conexao.conexao()
+        val con:Connection = mysql.conexao()
         var statement:PreparedStatement? = null
         var rs:ResultSet? = null
         try{
@@ -60,14 +60,14 @@ class clientesEntity {
         }catch (erro:SQLException){
             JOptionPane.showMessageDialog(null, "Não foi possível encontrar os clientes\nerro:$erro")
         } finally {
-            conexao.fecharConexao(con, statement, rs)
+            mysql.fecharConexao(con, statement, rs)
             return clientes
         }
     }
 
     fun getClientesEntityOfCity(cidade:String, estado: Estado):ArrayList<clientes>{
         val clientes = ArrayList<clientes>()
-        val con:Connection = conexao.conexao()
+        val con:Connection = mysql.conexao()
         var statement:PreparedStatement? = null
         var rs:ResultSet? = null
 
@@ -111,14 +111,14 @@ class clientesEntity {
         }catch (erro:SQLException){
             JOptionPane.showMessageDialog(null, "Não foi possível encontrar os clientes\nerro:$erro")
         } finally {
-            conexao.fecharConexao(con, statement, rs)
+            mysql.fecharConexao(con, statement, rs)
             return clientes
         }
     }
 
     fun getClientesEntityOfCity(cidade: String, bairro:String, estado:Estado):ArrayList<clientes>{
         val clientes = ArrayList<clientes>()
-        val con:Connection = conexao.conexao()
+        val con:Connection = mysql.conexao()
         var statement:PreparedStatement? = null
         var rs:ResultSet? = null
 
@@ -163,13 +163,13 @@ class clientesEntity {
         }catch (erro:SQLException){
             JOptionPane.showMessageDialog(null, "Não foi possível encontrar os clientes\nerro:$erro")
         } finally {
-            conexao.fecharConexao(con, statement, rs)
+            mysql.fecharConexao(con, statement, rs)
             return clientes
         }
     }
 
     fun addClientes(cliente: clientes){
-        val con:Connection = conexao.conexao();
+        val con:Connection = mysql.conexao();
         var statement:PreparedStatement? = null
         var check = false
         try {
@@ -189,12 +189,12 @@ class clientesEntity {
             println(erro)
             JOptionPane.showMessageDialog(null, "Erro ao inserir cliente no banco de dados.", "Sem êxito", JOptionPane.ERROR_MESSAGE)
         } finally {
-            conexao.fecharConexao(con, statement)
+            mysql.fecharConexao(con, statement)
         }
     }
 
     fun editClientes(cliente:clientes, oldDoc:String):Boolean{
-        val con:Connection = conexao.conexao()
+        val con:Connection = mysql.conexao()
         var statement:PreparedStatement? = null
         var check = false
         try {
@@ -214,13 +214,13 @@ class clientesEntity {
         } catch (erro:SQLException){
             JOptionPane.showMessageDialog(null, "Erro não foi possível atualizar o cliente. Codigo do erro:\n$erro")
         } finally {
-            conexao.fecharConexao(con, statement)
+            mysql.fecharConexao(con, statement)
             return check
         }
     }
 
     fun getClientesByCPF(): ArrayList<clientes> {
-        val con:Connection = conexao.conexao()
+        val con:Connection = mysql.conexao()
         var statement:PreparedStatement? = null
         var rs:ResultSet? = null
         val clientes = ArrayList<clientes>()
@@ -258,7 +258,7 @@ class clientesEntity {
             JOptionPane.showMessageDialog(null, "Não foi possível adquirir, ou não existe\num cliente com esse CPF.\nFavor caso primeira opção contar o Programador.",
             "Erro", JOptionPane.ERROR)
         } finally {
-            conexao.fecharConexao(con, statement, rs)
+            mysql.fecharConexao(con, statement, rs)
         }
         return clientes
     }

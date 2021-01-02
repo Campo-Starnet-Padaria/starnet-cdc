@@ -5,7 +5,6 @@
  */
 package starnet.cdc.gui;
 
-import starnet.cdc.StarnetCdc;
 import starnet.cdc.backend.PasswordConverter;
 import starnet.cdc.backend.Reference;
 import starnet.cdc.backend.validacao;
@@ -15,6 +14,7 @@ import starnet.cdc.database.dao.versionGetter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 
 public class LoginGUI extends javax.swing.JFrame {
@@ -34,39 +34,31 @@ public class LoginGUI extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (UnsupportedLookAndFeelException e) {
-
-            System.out.println("Erro: " + e.getMessage());
-            e.printStackTrace();
-
-        } catch (ClassNotFoundException e) {
-
-            System.out.println("Erro: " + e.getMessage());
-            e.printStackTrace();
-
-        } catch (InstantiationException e) {
-
-            System.out.println("Erro: " + e.getMessage());
-            e.printStackTrace();
-
-        } catch (IllegalAccessException e) {
-
+        } catch (UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException | ClassNotFoundException e) {
             System.out.println("Erro: " + e.getMessage());
             e.printStackTrace();
         }
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("starnet.png")));
-        versionGetter vg = new versionGetter();
-        String version = vg.version();
-        Reference rf = new Reference();
-        String versionFromDisc = rf.getVersionReference();
-        if (version != "null") {
-            if (!version.equals(versionFromDisc)) {
-                System.out.println(version.toString() != versionFromDisc.toString());
-                UpdateDialog dialog = new UpdateDialog(new javax.swing.JFrame(), true);
-                dialog.setVisible(true);
+
+        try {
+            versionGetter vg = new versionGetter();
+            String version = vg.version();
+            Reference rf = new Reference();
+            String versionFromDisc = rf.getVersionReference();
+            if (!version.equals("null")) {
+                if (!version.equals(versionFromDisc)) {
+                    System.out.println(!version.toString().equals(versionFromDisc));
+                    UpdateDialog dialog = new UpdateDialog(new javax.swing.JFrame(), true);
+                    dialog.setVisible(true);
+                }
             }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Erro não foi possível adquirir as informações do banco de dados.\n Aterar em Config/config.cfg" +
+                    "colocar db url: db user: db password: \n" + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
+
+
     }
 
     /**
@@ -175,14 +167,12 @@ public class LoginGUI extends javax.swing.JFrame {
             if (conta.getId() != null) {
                 MainGUI mainGUI = new MainGUI(conta);
                 mainGUI.setVisible(true);
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Este usuário não existe!\nFavor contar um " +
                                 "administrador para cadastrar, ou tentar novamente!", "Usuário não existe",
                         JOptionPane.ERROR_MESSAGE);
-                StarnetCdc cdc = new StarnetCdc();
-                cdc.restart();
             }
-            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Senha ou Nome, ou ambos não antendem os padrões.");
         }

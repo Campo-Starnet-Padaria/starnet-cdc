@@ -12,7 +12,7 @@ import starnet.cdc.backend.Error
 
 class DropDB {
     fun DropDB(){
-        val con:Connection = conexao.conexao()
+        val con:Connection = mysql.conexao()
         var statement:PreparedStatement? = null
 
         try{
@@ -22,7 +22,7 @@ class DropDB {
             val Error = Error()
             Error.openError("Não foi possível excluir o banco!")
         } finally {
-            conexao.fecharConexao(con, statement)
+            mysql.fecharConexao(con, statement)
         }
     }
 }
