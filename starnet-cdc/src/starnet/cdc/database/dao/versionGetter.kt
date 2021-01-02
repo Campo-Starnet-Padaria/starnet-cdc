@@ -1,5 +1,6 @@
 package starnet.cdc.database.dao
 
+import starnet.cdc.database.db.mysql
 import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.ResultSet

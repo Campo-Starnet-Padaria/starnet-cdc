@@ -9,6 +9,7 @@ import starnet.cdc.backend.enums.Estado
 import starnet.cdc.database.bean.bairro
 import starnet.cdc.database.bean.cidade
 import starnet.cdc.database.bean.clientes
+import starnet.cdc.database.db.mysql
 import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.ResultSet

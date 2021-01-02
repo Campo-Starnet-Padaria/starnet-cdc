@@ -5,9 +5,9 @@ Created on 20/11/2020
  */
 package starnet.cdc.database.dao
 
-import jdk.nashorn.internal.scripts.JO
 import starnet.cdc.database.bean.bairro
 import starnet.cdc.database.bean.cidade
+import starnet.cdc.database.db.mysql
 import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.ResultSet
