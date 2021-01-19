@@ -8,7 +8,6 @@ import starnet.cdc.database.bean.clientesFrontEnd
 import java.io.FileOutputStream
 import java.io.IOException
 import com.itextpdf.text.Paragraph
-import jdk.nashorn.internal.scripts.JO
 import java.awt.Desktop
 import java.io.File
 import java.nio.file.Path

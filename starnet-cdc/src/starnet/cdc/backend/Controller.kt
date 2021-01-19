@@ -114,8 +114,8 @@ class Controller {
         cliente.cidade = clientesFrontEnd.cidade
         cliente.bairro = clientesFrontEnd.bairro
 
-        if (cliente.cpf!!.isNotEmpty()) {
-            if (vali.validarCPF(cliente.cpf.toString())) {
+        if (clientesFrontEnd.cpf!!.isNotEmpty()) {
+            if (vali.validarCPF(clientesFrontEnd.cpf.toString())) {
                 cliente.cpf = encripta.encriptar2(clientesFrontEnd.cpf.toString())
             }
         }
