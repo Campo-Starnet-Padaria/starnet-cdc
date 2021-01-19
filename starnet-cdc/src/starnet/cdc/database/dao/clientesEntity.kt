@@ -10,19 +10,20 @@ import starnet.cdc.database.bean.bairro
 import starnet.cdc.database.bean.cidade
 import starnet.cdc.database.bean.clientes
 import starnet.cdc.database.db.mysql
-import java.sql.Connection
-import java.sql.PreparedStatement
-import java.sql.ResultSet
-import java.sql.SQLException
+import java.sql.*
+import java.text.SimpleDateFormat
+import java.time.LocalDate
 import javax.swing.JOptionPane
 
 class clientesEntity {
+    private val format = SimpleDateFormat("dd/MM/yyyy")
 
     fun getClientesEntityOfAllCities(estado:Estado):ArrayList<clientes>{
         val clientes = ArrayList<clientes>()
         val con:Connection = mysql.conexao()
         var statement:PreparedStatement? = null
         var rs:ResultSet? = null
+
         try{
             if (estado.toString() == "TODOS") {
                 statement = con.prepareStatement("SELECT * FROM clientes ORDER BY (nome)")
@@ -50,7 +51,7 @@ class clientesEntity {
                 cliente.nome = rs.getString("nome")
                 cliente.documento = rs.getString("documento")
                 cliente.cpf = rs.getString("cpf")
-                cliente.vencimento = rs.getString("vencimento")
+                cliente.vencimento = format.format(rs.getDate("vencimento"))
                 cliente.valor = rs.getFloat("valor")
                 cliente.observacao = rs.getString("observacao")
                 cliente.bairro = bairro
@@ -101,7 +102,7 @@ class clientesEntity {
                 cliente.nome = rs.getString("nome")
                 cliente.documento = rs.getString("documento")
                 cliente.cpf = rs.getString("cpf")
-                cliente.vencimento = rs.getString("vencimento")
+                cliente.vencimento = format.format(rs.getDate("vencimento"))
                 cliente.valor = rs.getFloat("valor")
                 cliente.observacao = rs.getString("observacao")
                 cliente.bairro = bairro
@@ -153,7 +154,7 @@ class clientesEntity {
                 cliente.nome = rs.getString("nome")
                 cliente.documento = rs.getString("documento")
                 cliente.cpf = rs.getString("cpf")
-                cliente.vencimento = rs.getString("vencimento")
+                cliente.vencimento = format.format(rs.getDate("vencimento"))
                 cliente.valor = rs.getFloat("valor")
                 cliente.observacao = rs.getString("observacao")
                 cliente.bairro = bairro
@@ -179,7 +180,9 @@ class clientesEntity {
             statement.setString(1, cliente.nome)
             statement.setString(2, cliente.documento)
             statement.setString(3,cliente.cpf)
-            statement.setString(4, cliente.vencimento)
+            val format = SimpleDateFormat("dd/MM/yyyy")
+            val data = Date(format.parse(cliente.vencimento).time)
+            statement.setDate(4, data)
             statement.setFloat(5, cliente.valor!!)
             statement.setBoolean(6, cliente.estado!!.estadoToBoolean(cliente.estado!!))
             statement.setString(7, cliente.observacao)
@@ -199,12 +202,14 @@ class clientesEntity {
         var statement:PreparedStatement? = null
         var check = false
         try {
-            statement = con.prepareStatement("UPDATE clientes SET nome = ?, documento = ?, cpf = ? vencimento = ?, " +
+            statement = con.prepareStatement("UPDATE clientes SET nome = ?, documento = ?, cpf = ?, vencimento = ?, " +
                     "valor = ?, estado = ?, observacao = ?, cidade = ?, bairro = ? WHERE (documento = ?)")
             statement.setString(1, cliente.nome)
             statement.setString(2, cliente.documento)
             statement.setString(3, cliente.cpf)
-            statement.setString(4, cliente.vencimento)
+            val format = SimpleDateFormat("dd/MM/yyyy")
+            val data = Date(format.parse(cliente.vencimento).time)
+            statement.setDate(4, data)
             statement.setFloat(5, cliente.valor!!)
             statement.setBoolean(6, cliente.estado!!.estadoToBoolean(cliente.estado!!))
             statement.setString(7, cliente.observacao)
@@ -212,12 +217,13 @@ class clientesEntity {
             statement.setString(9, cliente.bairro!!.nome.toString())
             statement.setString(10,oldDoc)
             check = statement.execute()
+            return check
         } catch (erro:SQLException){
             JOptionPane.showMessageDialog(null, "Erro não foi possível atualizar o cliente. Codigo do erro:\n$erro")
         } finally {
             mysql.fecharConexao(con, statement)
-            return check
         }
+        return false
     }
 
     fun getClientesByCPF(): ArrayList<clientes> {
@@ -247,7 +253,7 @@ class clientesEntity {
                 cliente.nome = rs.getString("nome")
                 cliente.documento = rs.getString("documento")
                 cliente.cpf = rs.getString("cpf")
-                cliente.vencimento = rs.getString("vencimento")
+                cliente.vencimento = format.format(rs.getDate("vencimento"))
                 cliente.valor = rs.getFloat("valor")
                 cliente.observacao = rs.getString("observacao")
                 cliente.bairro = bairro
